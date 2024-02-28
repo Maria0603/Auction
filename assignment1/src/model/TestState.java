@@ -21,7 +21,6 @@ public class TestState
     {
       vinyl.getLendingState().borrowVinyl(vinyl, c1);
       System.out.println(vinyl.getLendingState().getClass().getName() + "  " +vinyl.getLendingState().getBorrower().getName());//borrowed
-    //  System.out.println(vinyl.getLendingState().getClass().getName());//borrowed
 
     }
     catch(IllegalStateException e)
@@ -31,7 +30,6 @@ public class TestState
     try
     {
       vinyl.getLendingState().reserveVinyl(vinyl, c2);
-      //System.out.println(vinyl.getLendingState().getClass().getName());//reservedWhileBorrowed
       System.out.println(vinyl.getLendingState().getClass().getName()+ "  " +vinyl.getLendingState().getReserver().getName());//reservedWhileBorrowed
     }
     catch(IllegalStateException e)
@@ -41,7 +39,6 @@ public class TestState
     try
     {
       vinyl.getLendingState().reserveVinyl(vinyl, c3);
-      //System.out.println(vinyl.getLendingState().getClass().getName());
       System.out.println(vinyl.getLendingState().getClass().getName()+ "  " +vinyl.getLendingState().getReserver().getName() +vinyl.getLendingState().getReserver().getName());
 
     }
@@ -52,7 +49,6 @@ public class TestState
     try
     {
       vinyl.getLendingState().returnVinyl(vinyl, c2);
-      //System.out.println(vinyl.getLendingState().getClass().getName());
             System.out.println(vinyl.getLendingState().getClass().getName()+ "  " +vinyl.getLendingState().getBorrower().getName());
     }
     catch(IllegalStateException e)
@@ -62,7 +58,6 @@ public class TestState
     try
     {
       vinyl.getLendingState().returnVinyl(vinyl, c1);
-      //System.out.println(vinyl.getLendingState().getClass().getName());//reserved
       System.out.println(vinyl.getLendingState().getClass().getName() + vinyl.getLendingState().getReserver().getName());//reserved
     }
     catch(IllegalStateException e)
@@ -105,7 +100,50 @@ public class TestState
     {
       System.out.println(e.getMessage());
     }
-
-
+    try
+    {
+      vinyl.getLendingState().returnVinyl(vinyl, c2);
+      System.out.println(vinyl.getLendingState().getClass().getName());
+    }
+    catch(IllegalStateException e)
+    {
+      System.out.println(e.getMessage());//it is not borrowed
+    }
+    try
+    {
+      vinyl.getLendingState().borrowVinyl(vinyl, c3);
+      System.out.println(vinyl.getLendingState().getClass().getName());//borrowed
+    }
+    catch(IllegalStateException e)
+    {
+      System.out.println(e.getMessage());
+    }
+    try
+    {
+      vinyl.getLendingState().borrowVinyl(vinyl, c1);
+      System.out.println(vinyl.getLendingState().getClass().getName());
+    }
+    catch(IllegalStateException e)
+    {
+      System.out.println(e.getMessage());//already borrowed
+    }
+    try
+    {
+      vinyl.getLendingState().reserveVinyl(vinyl, c1);
+      System.out.println(vinyl.getLendingState().getClass().getName());//reservedWhileBorrowed
+    }
+    catch(IllegalStateException e)
+    {
+      System.out.println(e.getMessage());
+    }
+    try
+    {
+      vinyl.getLendingState().returnVinyl(vinyl, c1);
+      System.out.println(vinyl.getLendingState().getClass().getName());
+    }
+    catch(IllegalStateException e)
+    {
+      System.out.println(e.getMessage());//it is not you the one
+    }
   }
 }
