@@ -4,10 +4,11 @@ public abstract class VinylState
 {
   private boolean scheduledForRemoval;
   private Customer borrower, reserver;
-  public VinylState()
+  public VinylState(Customer borrower, Customer reserver)
   {
-    super();
-    this.scheduledForRemoval=false;
+    this.borrower=borrower;
+    this.reserver=reserver;
+    scheduledForRemoval=false;
   }
   public void setScheduledForRemoval(boolean remove)
   {
@@ -24,7 +25,7 @@ public abstract class VinylState
 
   public void setBorrower(Customer borrower)
   {
-    this.borrower = borrower;
+     this.borrower = borrower;
   }
 
   public Customer getReserver()
@@ -34,9 +35,9 @@ public abstract class VinylState
 
   public void setReserver(Customer reserver)
   {
-    this.reserver = reserver;
+     this.reserver = reserver;
   }
   public abstract void borrowVinyl(Vinyl vinyl, Customer customer);
-  public abstract void returnVinyl(Vinyl vinyl, Customer borrower, Customer reserver);
+  public abstract void returnVinyl(Vinyl vinyl, Customer customer);
   public abstract void reserveVinyl(Vinyl vinyl, Customer customer);
 }
