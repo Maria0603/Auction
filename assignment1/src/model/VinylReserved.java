@@ -10,8 +10,6 @@ public class VinylReserved extends VinylState
   {
     if(customer.getName().equals(super.getReserver().getName()))
     {
-      vinyl.getLendingState().setBorrower(customer);
-      vinyl.getLendingState().setReserver(null);
       vinyl.setLendingState(new VinylBorrowed(customer, null));
     }
     else throw new IllegalStateException("The vinyl is reserved by someone else");

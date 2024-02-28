@@ -14,7 +14,6 @@ public class VinylReservedWhileBorrowed extends VinylState
   {
     if(super.getBorrower() != null && customer!=null && super.getBorrower().getName().equals(customer.getName()))
     {
-      super.setBorrower(null);
       vinyl.setLendingState(new VinylReserved(null, super.getReserver()));
     }
     else throw new IllegalStateException("You are not the one who borrowed the vinyl");
