@@ -1,12 +1,13 @@
 package model;
 
-import java.beans.PropertyChangeSupport;
+import observer.PropertyChangeSubject;
 
-public interface VinylLibraryModel
+import java.util.List;
+
+public interface VinylLibraryModel extends PropertyChangeSubject
 {
-
-
-
-
+public  List<Vinyl> getAllVinyls();
+public  void addVinyl(Vinyl[] vinyl);
+public  void removeVinyl(String id);
 
 }
