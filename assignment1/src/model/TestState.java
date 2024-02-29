@@ -7,7 +7,7 @@ public class TestState
     Customer c1=new Customer("Customer1");
     Customer c2=new Customer("Customer2");
     Customer c3=new Customer("Customer3");
-    Vinyl vinyl=new Vinyl();
+    Vinyl vinyl=new Vinyl("a", "a", 1999);
     try
     {
       vinyl.setLendingState(new VinylAvailable(null, null));
