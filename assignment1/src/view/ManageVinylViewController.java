@@ -22,6 +22,9 @@ public class ManageVinylViewController
   private Region root;
 
   public void init(ViewHandler viewHandler, ManageVinylViewModel manageVinylViewModel, Region root){
+    this.viewHandler = viewHandler;
+    this.manageViewModel = manageVinylViewModel;
+    this.root = root;
 
   }
 

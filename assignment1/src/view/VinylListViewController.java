@@ -25,6 +25,9 @@ public class VinylListViewController
   private Region root;
 
   public void init(ViewHandler viewHandler, VinylListViewModel vinylListViewModel, Region root){
+    this.viewHandler = viewHandler;
+    this.vinylListViewModel = vinylListViewModel;
+    this.root = root;
 
   }
 
