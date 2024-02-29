@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 import viewmodel.ManageViewModel;
+import viewmodel.VinylListViewModel;
 import viewmodel.VinylViewModel;
 
 public class VinylListViewController
@@ -21,10 +22,10 @@ public class VinylListViewController
   public Label errorLabel;
 
   private ViewHandler viewHandler;
-  private ManageViewModel manageViewModel;
+  private VinylListViewModel vinylListViewModel;
   private Region root;
 
-  public void init(ViewHandler viewHandler, ManageViewModel manageViewModel, Region root){
+  public void init(ViewHandler viewHandler, VinylListViewModel vinylListViewModel, Region root){
 
   }
 
