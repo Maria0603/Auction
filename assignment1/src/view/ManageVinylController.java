@@ -5,9 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import viewmodel.ManageViewModel;
+import viewmodel.ManageVinylViewModel;
 
-public class ManageViewController
+public class ManageVinylController
 {
   public Label windowTypeLabel;
   public TextField titleField;
@@ -18,10 +18,10 @@ public class ManageViewController
   public Button cancelButton;
 
   private ViewHandler viewHandler;
-  private ManageViewModel manageViewModel;
+  private ManageVinylViewModel manageViewModel;
   private Region root;
 
-  public void init(ViewHandler viewHandler, ManageViewModel manageViewModel, Region root){
+  public void init(ViewHandler viewHandler, ManageVinylViewModel manageVinylViewModel, Region root){
 
   }
 
