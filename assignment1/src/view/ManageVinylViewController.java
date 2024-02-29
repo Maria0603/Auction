@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import viewmodel.ManageVinylViewModel;
 
-public class ManageVinylController
+public class ManageVinylViewController
 {
   public Label windowTypeLabel;
   public TextField titleField;
