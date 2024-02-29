@@ -1,5 +1,6 @@
 package model;
 
-public class VinylReserved
+public class VinylReserved extends  VinylState
 {
+
 }

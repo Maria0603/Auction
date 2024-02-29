@@ -1,5 +1,6 @@
 package model;
 
-public class VinylReservedWhileBorrowed
+public class VinylReservedWhileBorrowed extends VinylState
 {
+
 }
