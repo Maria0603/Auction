@@ -29,6 +29,15 @@ public class VinylListViewController
     this.vinylListViewModel = vinylListViewModel;
     this.root = root;
 
+    titleColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getTitleProperty());
+    artistColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getArtistProperty());
+    statusColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getStatusProperty());
+
+    vinylTableView.setItems(vinylListViewModel.getAll());
+
   }
 
   public void reset(){
