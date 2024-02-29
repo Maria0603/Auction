@@ -42,10 +42,14 @@ public class Vinyl
 
   public String getLendingStatus()
   {
-    if (lendingState == null) {
+    if (lendingState.getClass().equals(VinylAvailable.class))
       return "Available";
-    } else {
-      return lendingState.getClass().getSimpleName();
+     else if(lendingState.getClass().equals(VinylBorrowed.class))
+       return "Borrowed";
+     else if(lendingState.getClass().equals(VinylReserved.class))
+       return "Reserved";
+     else
+       return "Borrowed and Reserved";
     }
   }
-}
+
