@@ -20,17 +20,17 @@ public class VinylSimulation implements PropertyChangeListener
         {
           if (random == 1)
           {
-            vinyl.getLendingState().borrowVinyl(vinyl, customers[i % 2]);
+            model.borrowVinyl(vinyl, customers[i % 2]);
             System.out.println(customers[i % 2].getName() + " borrowed " + vinyl.getTitle() + " which is now: " + vinyl.getLendingStatus());
           }
           else if (random == 2)
           {
-            vinyl.getLendingState().reserveVinyl(vinyl, customers[i % 2]);
+            model.reserveVinyl(vinyl, customers[i % 2]);
             System.out.println(customers[i % 2].getName() + " reserved " + vinyl.getTitle() + " which is now: " + vinyl.getLendingStatus());
           }
           else
           {
-            vinyl.getLendingState().returnVinyl(vinyl, customers[i % 2]);
+            model.returnVinyl(vinyl, customers[i % 2]);
             System.out.println(customers[i % 2].getName() + " returned " + vinyl.getTitle() + " which is now: " + vinyl.getLendingStatus());
           }
         }

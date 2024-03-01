@@ -13,4 +13,9 @@ VinylState getLendingState(Vinyl vinyl);
 Vinyl getVinyl(String title);
 Vinyl getVinyl(int index);
 int getSize();
+void returnVinyl(Vinyl vinyl, Customer customer);
+void reserveVinyl(Vinyl vinyl, Customer customer);
+
+void borrowVinyl(Vinyl vinyl, Customer customer);
+
 }
