@@ -7,44 +7,55 @@ import java.util.List;
 
 public class VinylLibraryModelManager implements VinylLibraryModel
 {
-  private List<Vinyl> vinylList;
+  private VinylList vinylList;
   private PropertyChangeSupport propertyChangeSupport;
 
   public VinylLibraryModelManager()
   {
-    this.vinylList = new ArrayList<>();
+    this.vinylList = new VinylList(10);
+    new VinylSimulation(this);
     this.propertyChangeSupport = new PropertyChangeSupport(this);
   }
 
-  @Override public List<Vinyl> getAllVinyls()
+  @Override public ArrayList<Vinyl> getAllVinyls()
   {
-    return vinylList;
+    return vinylList.getAllVinyls();
   }
 
-  @Override public void addVinyl(Vinyl[] vinyl)
+  @Override public void addVinyl(Vinyl vinyl)
   {
-    for (Vinyl vinyls : vinyl)
-    {
-      vinylList.add(vinyls);
-      propertyChangeSupport.firePropertyChange("VinylAdded", null, vinyls);
-    }
+      vinylList.addVinyl(vinyl);
+      propertyChangeSupport.firePropertyChange("VinylAdded", null, vinylList);
+  }
+  @Override public Vinyl getVinyl(int index)
+  {
+    return vinylList.getVinyl(index);
   }
 
   @Override public void removeVinyl(String title)
   {
-    for (Vinyl vinyl : vinylList)
-      if (vinyl.getTitle().equals(title) && vinyl.getLendingStatus().equals("Available"))
+    for (int i=0; i<vinylList.getSize(); i++)
+    {
+      Vinyl vinyl=vinylList.getVinyl(i);
+      if (vinyl.getTitle().equals(title))
       {
-        vinylList.remove(vinyl);
+        if(vinyl.getLendingStatus().equals("Available"))
+       {
+        vinylList.removeVinyl(vinyl);
         propertyChangeSupport.firePropertyChange("VinylRemoved", null, vinyl);
-
         break;
-      }
+       }
       else
-      {
+       {
         vinyl.getLendingState().setScheduledForRemoval(true);
         propertyChangeSupport.firePropertyChange("VinylToBeRemoved", null, vinyl);
+       }
       }
+    }
+  }
+  @Override public int getSize()
+  {
+    return vinylList.getSize();
   }
 
   @Override public void addListener(PropertyChangeListener listener)
@@ -61,17 +72,62 @@ public class VinylLibraryModelManager implements VinylLibraryModel
   {
     return vinyl.getLendingState();
   }
+  @Override public Vinyl getVinyl(String title)
+  {
+    for (int i=0; i<vinylList.getSize(); i++)
+      if (vinylList.getVinyl(i).getTitle().equals(title))
+      {
+        return vinylList.getVinyl(i);
+      }
+    return null;
+  }
+  public void reserveVinyl(Vinyl vinyl, Customer customer)
+  {
+    vinyl.getLendingState().reserveVinyl(vinyl, customer);
+  }
+  public void returnVinyl(Vinyl vinyl, Customer customer)
+  {
+    vinyl.getLendingState().returnVinyl(vinyl, customer);
+  }
+  public void borrowVinyl(Vinyl vinyl, Customer customer)
+  {
+    vinyl.getLendingState().borrowVinyl(vinyl, customer);
+  }
 
   public static void main(String[] args)
   {
     Customer c1 = new Customer("Customer1");
     Customer c2 = new Customer("Customer2");
     Customer c3 = new Customer("Customer3");
-    Vinyl vinyl1 = new Vinyl("a", "a", 1999);
-    VinylList list = new VinylList();
+    Vinyl vinyl1 = new Vinyl("a", "a", 1990);
+    Vinyl vinyl2 = new Vinyl("b", "b", 1899);
+    Vinyl vinyl3 = new Vinyl("c", "c", 1799);
+    Vinyl vinyl4 = new Vinyl("d", "d", 1909);
+
+    VinylLibraryModelManager list=new VinylLibraryModelManager();
     list.addVinyl(vinyl1);
-    Vinyl vinyl = list.getVinyl("a");
-    try
+    list.addVinyl(vinyl2);
+    list.addVinyl(vinyl3);
+    list.addVinyl(vinyl4);
+
+
+    /*Vinyl vinyl = list.getVinyl("a");
+    System.out.println(vinyl.getLendingStatus());
+    list.addVinyl(vinyl);
+    System.out.println(list.getAllVinyls());
+   // list.removeVinyl(vinyl.getTitle());
+   // System.out.println(list.getAllVinyls());
+
+    list.getVinyl(1).setLendingState(new VinylReserved(null, new Customer("Brrr")));
+    list.removeVinyl(list.getVinyl(1).getTitle());
+    System.out.println(list.getAllVinyls());
+    System.out.println(list.getVinyl(1).getLendingStatus());
+    System.out.println(list.getVinyl(1).getLendingState().getScheduledForRemoval());
+    list.getVinyl(1).setLendingState(new VinylAvailable(null, null));
+    list.removeVinyl(list.getVinyl(1).getTitle());
+    System.out.println(list.getAllVinyls());*/
+
+   /* try
     {
       vinyl.setLendingState(new VinylAvailable(null, null));
       System.out.println(vinyl.getLendingStatus());//available
@@ -212,7 +268,7 @@ public class VinylLibraryModelManager implements VinylLibraryModel
     catch (IllegalStateException e)
     {
       System.out.println(e.getMessage());//it is not you the one
-    }
+    }*/
   }
 }
 

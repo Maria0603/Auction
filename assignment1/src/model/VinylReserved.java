@@ -6,7 +6,7 @@ public class VinylReserved extends VinylState
   {
     super(borrower, reserver);
   }
-  @Override public void borrowVinyl(Vinyl vinyl, Customer customer)
+  @Override public  synchronized void borrowVinyl(Vinyl vinyl, Customer customer)
   {
     if(customer.getName().equals(super.getReserver().getName()))
     {
@@ -14,11 +14,11 @@ public class VinylReserved extends VinylState
     }
     else throw new IllegalStateException("The vinyl is reserved by someone else");
   }
-  @Override public void returnVinyl(Vinyl vinyl, Customer customer)
+  @Override public synchronized  void returnVinyl(Vinyl vinyl, Customer customer)
   {
     throw new IllegalStateException("The vinyl is not borrowed");
   }
-  @Override public void reserveVinyl(Vinyl vinyl, Customer customer)
+  @Override public synchronized  void reserveVinyl(Vinyl vinyl, Customer customer)
   {
     throw new IllegalStateException("The vinyl is already reserved by someone else");
   }

@@ -14,6 +14,7 @@ public class Vinyl
     this.title = title;
     this.artist = artist;
     this.year = year;
+    this.lendingState=new VinylAvailable(null, null);
   }
 
   public String getArtist()
