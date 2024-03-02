@@ -1,10 +1,8 @@
-package model;
+package tests;
 
 import model.*;
 
-import java.util.Arrays;
-
-public class Test2 {
+public class TestAddRemove {
   public static void main(String[] args) {
 
     Vinyl vinyl1 = new Vinyl("Title1", "Artist1", 2000);

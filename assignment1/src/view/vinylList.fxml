@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
    <children>
-      <TableView fx:id="vinylTableView" layoutX="204.0" layoutY="36.0" prefHeight="198.0" prefWidth="375.0">
+      <TableView fx:id="vinylTableView" layoutX="204.0" layoutY="36.0" prefHeight="198.0" prefWidth="423.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="155.20001220703125" text="Title" />
-            <TableColumn fx:id="artistColumn" prefWidth="119.20001220703125" text="Artist" />
-            <TableColumn fx:id="statusColumn" prefWidth="94.39996337890625" text="Status" />
+          <TableColumn fx:id="titleColumn" prefWidth="117.60003662109375" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="92.79998779296875" text="Artist" />
+            <TableColumn fx:id="statusColumn" prefWidth="104.79998779296875" text="Status" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="107.199951171875" text="Borrower" />
         </columns>
       </TableView>
       <Label layoutX="35.0" layoutY="36.0" prefHeight="42.0" prefWidth="125.0" text="Vinyl Shop">

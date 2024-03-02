@@ -52,5 +52,10 @@ public class Vinyl
      else
        return "Borrowed and Reserved";
     }
+
+  @Override public String toString() {
+    return "Vinyl{" + "lendingState=" + getLendingStatus() + ", title='" + title
+        + '\'' + ", artist='" + artist + '\'' + ", year=" + year + '}';
   }
+}
 

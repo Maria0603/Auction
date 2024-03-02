@@ -1,4 +1,8 @@
-package model;
+package tests;
+
+import model.Customer;
+import model.Vinyl;
+import model.VinylAvailable;
 
 public class TestState
 {
