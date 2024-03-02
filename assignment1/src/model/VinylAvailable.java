@@ -3,7 +3,6 @@ package model;
 public class VinylAvailable extends VinylState{
     @Override
     public void _borrow(Vinyl vinyl, String borrower) {
-
         vinyl.setState(new VinylBorrowed());
         vinyl.setBorrower(borrower);
 

@@ -13,6 +13,10 @@ public class VinylBorrowed extends VinylState{
                 vinyl.setState(new VinylAvailable());
                 vinyl.setBorrower(null);
             }
+            else{
+                throw new IllegalStateException("Cannot returned when not the borrower");
+            }
+
         }
     }
 

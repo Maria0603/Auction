@@ -3,14 +3,19 @@ package model;
 public class VinylReserved extends VinylState{
     @Override
     public void _borrow(Vinyl vinyl, String borrower) {
-        if(vinyl.getBorrower().equals(borrower)){
+
+        if(vinyl.getReserver().equals(borrower)){
             vinyl.setBorrower(borrower);
+            vinyl.setReserver(null);
             vinyl.setState(new VinylBorrowed());
 
         }
         else {
             throw new IllegalStateException("Cannot borrow unless is reserver");
         }
+
+
+
     }
 
     @Override

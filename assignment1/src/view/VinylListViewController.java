@@ -43,6 +43,8 @@ public class VinylListViewController
             cellData -> cellData.getValue().getReserverProperty());
     vinylTableView.setItems(vinylListViewModel.getAll());
 
+    errorLabel.setText("");
+
   }
 
   public void reset(){

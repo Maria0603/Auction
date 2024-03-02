@@ -91,4 +91,7 @@ public class ManageVinylViewController
       errorLabel.setText(e.getMessage());
     }
   }
+  @FXML private void onCancel(){
+    viewHandler.openView("list");
+  }
 }
