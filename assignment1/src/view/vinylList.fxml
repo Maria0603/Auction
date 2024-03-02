@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+   <children>
+      <TableView fx:id="vinylTableView" layoutX="228.0" layoutY="36.0" prefHeight="266.0" prefWidth="640.0">
+        <columns>
+          <TableColumn fx:id="titleColumn" prefWidth="126.0" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="125.0" text="Artist" />
+            <TableColumn fx:id="statusColumn" prefWidth="190.0" text="Status" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="111.0" text="Borrower" />
+            <TableColumn fx:id="reserverColumn" prefWidth="87.0" text="Reserver" />
+        </columns>
+      </TableView>
+      <Label layoutX="35.0" layoutY="36.0" prefHeight="42.0" prefWidth="125.0" text="Vinyl Shop">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="openButton" layoutX="27.0" layoutY="130.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="79.0" prefWidth="174.0" text="Manage">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font></Button>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="11.0" layoutY="317.0" prefHeight="79.0" prefWidth="174.0" text="Error" textFill="#b14343">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
