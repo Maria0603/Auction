@@ -1,28 +1,37 @@
 package model;
 
-public class VinylBorrowed extends VinylState
-{
-
-  public VinylBorrowed(Customer borrower, Customer reserver)
-  {
-    super(borrower, reserver);
-  }
-  @Override public  synchronized void borrowVinyl(Vinyl vinyl, Customer customer)
-  {
-    throw new IllegalStateException("The vinyl is already borrowed");
-  }
-  @Override public synchronized  void returnVinyl(Vinyl vinyl, Customer customer)
-  {
-    if(super.getBorrower() != null && super.getBorrower().getName().equals(customer.getName()))
-    {
-      vinyl.setLendingState(new VinylAvailable(null, super.getReserver()));
+public class VinylBorrowed extends VinylState{
+    @Override
+    public void _borrow(Vinyl vinyl, String customer) {
+        throw new IllegalStateException("Cannot borrow a borrowed vinyl");
     }
-    else throw new IllegalStateException("You are not the one who borrowed the vinyl");
-  }
-  @Override public synchronized  void reserveVinyl(Vinyl vinyl, Customer customer)
-  {
-    if(super.getBorrower()!=customer)
-     vinyl.setLendingState(new VinylReservedWhileBorrowed(super.getBorrower(), customer));
-    else throw new IllegalStateException("You already borrowed this vinyl");
-  }
+
+    @Override
+    public void _return(Vinyl vinyl, String borrower) {
+        if(vinyl.getBorrower() != null){
+            if(vinyl.getBorrower().equals(borrower)){
+                vinyl.setState(new VinylAvailable());
+                vinyl.setBorrower(null);
+
+            }
+
+        }
+    }
+
+    @Override
+    public void _reserve(Vinyl vinyl, String reserver) {
+        if(!vinyl.getBorrower().equals(reserver)){
+            vinyl.setState(new VinylReservedWhileBorrowed());
+            vinyl.setReserver(reserver);
+        }
+        else{
+            throw new IllegalStateException("Cannot reserve by the same person");
+        }
+
+    }
+
+    @Override
+    public String getStatus() {
+        return getClass().getSimpleName();
+    }
 }

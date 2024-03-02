@@ -1,6 +1,7 @@
 package view;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,13 +10,17 @@ import viewmodel.ManageVinylViewModel;
 
 public class ManageVinylViewController
 {
-  public Label windowTypeLabel;
-  public TextField titleField;
-  public TextField artistField;
-  public TextField statusField;
-  public Label errorLabel;
-  public Button submitButton;
-  public Button cancelButton;
+
+
+  @FXML private TextField nameField;
+  @FXML private TextField titleField;
+  @FXML private TextField artistField;
+  @FXML private TextField statusField;
+  @FXML private Label errorLabel;
+
+  @FXML private Button borrowButton;
+  @FXML private Button reserveButton;
+  @FXML private Button returnButton;
 
   private ViewHandler viewHandler;
   private ManageVinylViewModel manageViewModel;
@@ -26,19 +31,51 @@ public class ManageVinylViewController
     this.manageViewModel = manageVinylViewModel;
     this.root = root;
 
+    nameField.textProperty().bindBidirectional(manageVinylViewModel.nameProperty);
+
+    reset();
+
   }
 
   public void reset(){
+    errorLabel.setText("");
+
+    titleField.setText(manageViewModel.getViewState().getTitle());
+    artistField.setText(manageViewModel.getViewState().getArtist());
+    statusField.setText(manageViewModel.getViewState().getState());
 
   }
 
   public Region getRoot(){return root;}
 
-  public void submitPressed(ActionEvent actionEvent) {
 
+  @FXML private void borrowPressed() {
+    if(manageViewModel.onBorrow()){
+      errorLabel.setText("");
+      viewHandler.openView("list");
+    }
+    else{
+      errorLabel.setText("No name Inserted");
+    }
   }
 
-  public void cancelPressed(ActionEvent actionEvent) {
+  @FXML private void reservePressed() {
+    if(manageViewModel.onReserve()){
+      errorLabel.setText("");
+      viewHandler.openView("list");
+    }
+    else{
+      errorLabel.setText("No name Inserted");
+    }
+  }
 
+  @FXML private void returnPressed() {
+    if(manageViewModel.onReturn()){
+      errorLabel.setText("");
+      viewHandler.openView("list");
+    }
+    else{
+      errorLabel.setText("No name Inserted");
+    }
   }
 }

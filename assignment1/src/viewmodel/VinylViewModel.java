@@ -10,13 +10,16 @@ public class VinylViewModel
   private StringProperty artistProperty;
   private StringProperty statusProperty;
   private StringProperty borrowerProperty;
-
+  private StringProperty stateProperty;
+  private StringProperty reserverProperty;
 
   public VinylViewModel(Vinyl vinyl){
     titleProperty = new SimpleStringProperty(vinyl.getTitle());
     artistProperty = new SimpleStringProperty(vinyl.getArtist());
-    statusProperty = new SimpleStringProperty(vinyl.getLendingStatus());
-    borrowerProperty = new SimpleStringProperty("");
+    statusProperty = new SimpleStringProperty(vinyl.getStatus());
+
+    borrowerProperty = new SimpleStringProperty(vinyl.getBorrower());
+    reserverProperty = new SimpleStringProperty(vinyl.getReserver());
   }
 
   public StringProperty getTitleProperty() {
@@ -34,6 +37,10 @@ public class VinylViewModel
 
   public void setBorrowerProperty(String name){
     this.borrowerProperty.set(name);
+  }
+  public void setReserverProperty(String reserver){this.reserverProperty.set(reserver);}
+  public void setStateProperty(String stateProperty) {
+    this.stateProperty.set(stateProperty);
   }
 
   @Override public String toString() {

@@ -1,22 +1,29 @@
 package model;
 
-public class VinylAvailable extends VinylState
-{
+public class VinylAvailable extends VinylState{
+    @Override
+    public void _borrow(Vinyl vinyl, String borrower) {
 
-  public VinylAvailable(Customer borrower, Customer reserver)
-  {
-    super(null, null);
-  }
-  @Override public synchronized void borrowVinyl(Vinyl vinyl, Customer customer)
-  {
-    vinyl.setLendingState(new VinylBorrowed(customer, null));
-  }
-  @Override public synchronized void returnVinyl(Vinyl vinyl, Customer customer)
-  {
-    throw new IllegalStateException("The vinyl is not borrowed");
-  }
-  @Override public synchronized  void reserveVinyl(Vinyl vinyl, Customer customer)
-  {
-    vinyl.setLendingState(new VinylReserved(null, customer));
-  }
+        vinyl.setState(new VinylBorrowed());
+        vinyl.setBorrower(borrower);
+
+    }
+
+    @Override
+    public void _return(Vinyl vinyl, String borrower) {
+        throw new IllegalStateException("Vinyl is not borrowed");
+    }
+
+    @Override
+    public void _reserve(Vinyl vinyl, String reserver) {
+        vinyl.setState(new VinylReserved());
+        vinyl.setReserver(reserver);
+
+    }
+
+    @Override
+    public String getStatus() {
+        return getClass().getSimpleName();
+    }
+
 }

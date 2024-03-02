@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
    <children>
       <TableView fx:id="vinylTableView" layoutX="204.0" layoutY="36.0" prefHeight="198.0" prefWidth="423.0">
         <columns>
@@ -22,9 +22,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="reserveButton" layoutX="35.0" layoutY="93.0" mnemonicParsing="false" onAction="#reservePressed" prefHeight="28.0" prefWidth="126.0" text="Reserve" />
-      <Button fx:id="borrowButton" layoutX="35.0" layoutY="135.0" mnemonicParsing="false" onAction="#borrowPressed" prefHeight="28.0" prefWidth="126.0" text="Borrow" />
-      <Button fx:id="returnButton" layoutX="35.0" layoutY="182.0" mnemonicParsing="false" onAction="#returnPressed" prefHeight="28.0" prefWidth="126.0" text="Return" />
+      <Button fx:id="openButton" layoutX="35.0" layoutY="93.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="28.0" prefWidth="126.0" text="Open" />
       <Label fx:id="errorLabel" layoutX="35.0" layoutY="242.0" prefHeight="26.0" prefWidth="385.0" text="Error" textFill="#b14343">
          <font>
             <Font size="17.0" />

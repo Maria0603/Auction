@@ -1,16 +1,16 @@
 package viewmodel;
 
-import model.VinylLibraryModel;
-import view.ManageVinylViewController;
+import model.Model;
+
 
 public class ViewModelFactory
 {
   private ManageVinylViewModel manageVinylViewModel;
   private VinylListViewModel vinylListViewModel;
-  private ViewModelState viewModelState;
+  private ViewState viewModelState;
 
-  public ViewModelFactory(VinylLibraryModel model){
-    viewModelState = new ViewModelState();
+  public ViewModelFactory(Model model){
+    viewModelState = new ViewState();
     vinylListViewModel = new VinylListViewModel(model, viewModelState);
     manageVinylViewModel = new ManageVinylViewModel(model, viewModelState);
   }

@@ -49,15 +49,12 @@ public class VinylListViewController
 
   public Region getRoot(){return root;}
 
-  public void reservePressed(ActionEvent actionEvent) {
+  public void onButtonPress() {
+
+    vinylListViewModel.setSelected(vinylTableView.getFocusModel().getFocusedItem());
+    vinylListViewModel.onButtonPress();
+    viewHandler.openView("manage");
 
   }
 
-  public void borrowPressed(ActionEvent actionEvent) {
-
-  }
-
-  public void returnPressed(ActionEvent actionEvent) {
-
-  }
 }
