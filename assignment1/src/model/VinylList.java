@@ -5,11 +5,11 @@ import java.util.List;
 
 public class VinylList
 {
-  private List<Vinyl> vinyls;
+  private ArrayList<Vinyl> vinyls;
 
-  public VinylList()
+  public VinylList(int capacity)
   {
-    this.vinyls = new ArrayList<>(10);
+    this.vinyls = new ArrayList<>(capacity);
   }
 
   public Vinyl getVinyl(String title)
@@ -23,31 +23,33 @@ public class VinylList
     }
     return null;
   }
+  public Vinyl getVinyl(int index)
+  {
+    return vinyls.get(index);
+  }
 
   public void addVinyl(Vinyl vinyl)
   {
     if (vinyls.size() < 10)
-    {
       vinyls.add(vinyl);
-    }
-    else
-    {
-      System.out.println("The list of vinyls is full.");
-    }
   }
 
-  public List<Vinyl> getAllVinyls()
+  public ArrayList<Vinyl> getAllVinyls()
   {
-    return new ArrayList<>(vinyls);
+    return vinyls;
   }
 
   public void removeVinyl(Vinyl vinyl)
   {
-    if (vinyl.getTitle().equals(vinyl.getTitle()) && vinyl.getLendingStatus().equals("Available"))
+    if (vinyl.getLendingStatus().equals("Available"))
     {
       vinyls.remove(vinyl);
     }
     else
       getVinyl(vinyl.getTitle()).getLendingState().setScheduledForRemoval(true);
+  }
+  public int getSize()
+  {
+    return vinyls.size();
   }
 }

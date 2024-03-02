@@ -12,7 +12,7 @@ public class Test2 {
     Vinyl vinyl3 = new Vinyl("Title3", "Artist3", 2020);
 
 
-    VinylList vinylList = new VinylList();
+    VinylList vinylList = new VinylList(10);
 
 
     vinylList.addVinyl(vinyl1);
@@ -38,7 +38,10 @@ public class Test2 {
 
 
     System.out.println("\nAdding vinyls using VinylLibraryModelManager:");
-    modelManager.addVinyl(new Vinyl[]{vinyl1, vinyl2, vinyl3});
+    modelManager.addVinyl(vinyl1);
+    modelManager.addVinyl(vinyl2);
+    modelManager.addVinyl(vinyl2);
+
 
     System.out.println("\nAll vinyls in model manager:");
     for (Vinyl vinyl : modelManager.getAllVinyls()) {
