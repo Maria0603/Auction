@@ -16,6 +16,7 @@ public class VinylListViewController
   public TableColumn<VinylViewModel, String> artistColumn;
   public TableColumn<VinylViewModel, String> statusColumn;
   public TableColumn<VinylViewModel, String> borrowerColumn;
+  public TableColumn<VinylViewModel, String> reserverColumn;
   public Button reserveButton;
   public Button borrowButton;
   public Button returnButton;
@@ -38,13 +39,14 @@ public class VinylListViewController
         cellData -> cellData.getValue().getStatusProperty());
     borrowerColumn.setCellValueFactory(
         cellData -> cellData.getValue().getBorrowerProperty());
-
+    reserverColumn.setCellValueFactory(
+            cellData -> cellData.getValue().getReserverProperty());
     vinylTableView.setItems(vinylListViewModel.getAll());
 
   }
 
   public void reset(){
-
+    vinylListViewModel.clear();
   }
 
   public Region getRoot(){return root;}

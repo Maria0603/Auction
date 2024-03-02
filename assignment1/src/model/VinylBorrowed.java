@@ -12,9 +12,7 @@ public class VinylBorrowed extends VinylState{
             if(vinyl.getBorrower().equals(borrower)){
                 vinyl.setState(new VinylAvailable());
                 vinyl.setBorrower(null);
-
             }
-
         }
     }
 

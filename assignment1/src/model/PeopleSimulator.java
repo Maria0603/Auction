@@ -1,8 +1,13 @@
 package model;
 
-public class PeopleSimulator {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class PeopleSimulator implements PropertyChangeListener {
 
     public PeopleSimulator(Model model){
+
+        model.addListener(this);
 
         new Thread(() -> {
             String[] peeps = {"Bob", "Wendy"};
@@ -18,24 +23,29 @@ public class PeopleSimulator {
 
                 double rand = Math.random();
                 if(rand < 0.33){
-                    System.out.println(name + " borrowed " + vinylTitles[index]);
+                    //System.out.println(" - "  + name + " borrowed " + vinylTitles[index]);
                     model.borrowVinyl(name, vinylTitles[index]);
                 } else if (rand > 0.33 && rand < 0.66) {
-                    System.out.println(name + " reserved " + vinylTitles[index]);
+                    //System.out.println(" - "  + name + " reserved " + vinylTitles[index]);
                     model.reserveVinyl(name, vinylTitles[index]);
                 }
                 else{
-                    System.out.println(name + " returned " + vinylTitles[index]);
+                    //System.out.println(" - "  + name + " returned " + vinylTitles[index]);
                     model.returnVinyl(name, vinylTitles[index]);
                 }
 
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(7500);
                 } catch (InterruptedException e) {
                     break;
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println(" -- > " + evt.getPropertyName() + ": " + evt.getOldValue() + ", " + evt.getNewValue());
     }
 }

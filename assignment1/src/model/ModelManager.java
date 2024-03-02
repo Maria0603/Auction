@@ -10,7 +10,7 @@ public class ModelManager implements Model{
         list = new VinylList();
         property = new PropertyChangeSupport(this);
         createDummyData();
-        //new PeopleSimulator(this);
+        startPeopleSimulation();
     }
 
     private void createDummyData(){
@@ -21,6 +21,11 @@ public class ModelManager implements Model{
         list.addVinyl(new Vinyl("Shut the fuck up", "Pink guy", 2010));
         list.addVinyl(new Vinyl("eat my ass", "@(Q*!@_#!", 2066));
     }
+
+    public void startPeopleSimulation(){
+        new PeopleSimulator(this);
+    }
+
     @Override
     public VinylList getList(){return list;}
     @Override

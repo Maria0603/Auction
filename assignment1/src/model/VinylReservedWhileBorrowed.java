@@ -13,6 +13,9 @@ public class VinylReservedWhileBorrowed extends VinylState{
             vinyl.setBorrower(vinyl.getReserver());
             vinyl.setReserver(null);
         }
+        else{
+            throw new IllegalStateException("Cannot if not borrower");
+        }
     }
 
     @Override

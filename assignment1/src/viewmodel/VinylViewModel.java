@@ -20,6 +20,7 @@ public class VinylViewModel
 
     borrowerProperty = new SimpleStringProperty(vinyl.getBorrower());
     reserverProperty = new SimpleStringProperty(vinyl.getReserver());
+    stateProperty = new SimpleStringProperty(vinyl.getStatus());
   }
 
   public StringProperty getTitleProperty() {
@@ -34,6 +35,7 @@ public class VinylViewModel
     return statusProperty;
   }
   public StringProperty getBorrowerProperty() {return borrowerProperty;}
+  public StringProperty getReserverProperty() {return reserverProperty;}
 
   public void setBorrowerProperty(String name){
     this.borrowerProperty.set(name);

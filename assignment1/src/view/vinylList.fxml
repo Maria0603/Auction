@@ -7,14 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
    <children>
-      <TableView fx:id="vinylTableView" layoutX="204.0" layoutY="36.0" prefHeight="198.0" prefWidth="423.0">
+      <TableView fx:id="vinylTableView" layoutX="228.0" layoutY="36.0" prefHeight="266.0" prefWidth="655.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="117.60003662109375" text="Title" />
-            <TableColumn fx:id="artistColumn" prefWidth="92.79998779296875" text="Artist" />
-            <TableColumn fx:id="statusColumn" prefWidth="104.79998779296875" text="Status" />
-            <TableColumn fx:id="borrowerColumn" prefWidth="107.199951171875" text="Borrower" />
+          <TableColumn fx:id="titleColumn" prefWidth="99.0" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="103.0" text="Artist" />
+            <TableColumn fx:id="statusColumn" prefWidth="168.0" text="Status" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="97.0" text="Borrower" />
+            <TableColumn fx:id="reserverColumn" prefWidth="156.0" text="Reserver" />
         </columns>
       </TableView>
       <Label layoutX="35.0" layoutY="36.0" prefHeight="42.0" prefWidth="125.0" text="Vinyl Shop">
@@ -22,8 +23,8 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="openButton" layoutX="35.0" layoutY="93.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="28.0" prefWidth="126.0" text="Open" />
-      <Label fx:id="errorLabel" layoutX="35.0" layoutY="242.0" prefHeight="26.0" prefWidth="385.0" text="Error" textFill="#b14343">
+      <Button fx:id="openButton" layoutX="35.0" layoutY="93.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="152.0" prefWidth="126.0" text="Open" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="11.0" layoutY="317.0" prefHeight="79.0" prefWidth="174.0" text="Error" textFill="#b14343">
          <font>
             <Font size="17.0" />
          </font>

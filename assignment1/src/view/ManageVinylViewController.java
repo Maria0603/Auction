@@ -32,6 +32,7 @@ public class ManageVinylViewController
     this.root = root;
 
     nameField.textProperty().bindBidirectional(manageVinylViewModel.nameProperty);
+    statusField.textProperty().bindBidirectional(manageVinylViewModel.statusProperty);
 
     reset();
 
@@ -50,32 +51,44 @@ public class ManageVinylViewController
 
 
   @FXML private void borrowPressed() {
-    if(manageViewModel.onBorrow()){
-      errorLabel.setText("");
-      viewHandler.openView("list");
-    }
-    else{
-      errorLabel.setText("No name Inserted");
+    try{
+      if(manageViewModel.onBorrow()){
+        errorLabel.setText("");
+        viewHandler.openView("list");
+      }
+      else{
+        errorLabel.setText("No name Inserted");
+      }
+    } catch (IllegalStateException e){
+      errorLabel.setText(e.getMessage());
     }
   }
 
   @FXML private void reservePressed() {
-    if(manageViewModel.onReserve()){
-      errorLabel.setText("");
-      viewHandler.openView("list");
-    }
-    else{
-      errorLabel.setText("No name Inserted");
+    try{
+      if(manageViewModel.onReserve()){
+        errorLabel.setText("");
+        viewHandler.openView("list");
+      }
+      else{
+        errorLabel.setText("No name Inserted");
+      }
+    } catch (IllegalStateException e){
+      errorLabel.setText(e.getMessage());
     }
   }
 
   @FXML private void returnPressed() {
-    if(manageViewModel.onReturn()){
-      errorLabel.setText("");
-      viewHandler.openView("list");
-    }
-    else{
-      errorLabel.setText("No name Inserted");
+    try{
+      if(manageViewModel.onReturn()){
+        errorLabel.setText("");
+        viewHandler.openView("list");
+      }
+      else{
+        errorLabel.setText("No name Inserted");
+      }
+    } catch (IllegalStateException e){
+      errorLabel.setText(e.getMessage());
     }
   }
 }

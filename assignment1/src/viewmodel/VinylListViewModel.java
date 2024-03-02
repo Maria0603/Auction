@@ -43,6 +43,7 @@ public class VinylListViewModel implements PropertyChangeListener
 
   public void clear(){
     errorProperty.set("");
+    loadFromModel();
   }
 
   public ObservableList<VinylViewModel> getAll() {
