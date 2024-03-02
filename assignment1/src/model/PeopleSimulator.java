@@ -13,20 +13,19 @@ public class PeopleSimulator implements PropertyChangeListener {
 
 
         new Thread(() -> {
-            String[] peeps = {"Bob", "Wendy"};
-            String[] vinylTitles = new String[model.getList().getAlbum().size()];
+            String[] customers = {"Bob", "Wendy"};
+            String[] vinylTitles = new String[model.getList().getAllVinyls().size()];
 
-            for (int z = 0; z < model.getList().getAlbum().size(); z++) {
-                vinylTitles[z] = model.getList().getAlbum().get(z).getTitle();
+            for (int z = 0; z < model.getList().getAllVinyls().size(); z++) {
+                vinylTitles[z] = model.getList().getAllVinyls().get(z).getTitle();
             }
 
-            for (int i = 0; i < 1000; i++) {
-                String name = peeps[i%2];
-                int index = (int) (Math.random() * model.getList().getAlbum().size());
+            for (int i = 0; ; i++) {
+                String name = customers[i%2];
+                int index = (int) (Math.random() * model.getList().getAllVinyls().size());
 
                 double rand = Math.random();
                 if(rand < 0.33){
-                    //System.out.println(" - "  + name + " borrowed " + vinylTitles[index]);
                     try {
                         model.borrowVinyl(vinylTitles[index], name);
                     }
@@ -34,7 +33,6 @@ public class PeopleSimulator implements PropertyChangeListener {
                         System.out.println(e.getMessage());
                     }
                 } else if (rand > 0.33 && rand < 0.66) {
-                    //System.out.println(" - "  + name + " reserved " + vinylTitles[index]);
                     try{
                         model.reserveVinyl(vinylTitles[index], name);
                     }
@@ -43,7 +41,6 @@ public class PeopleSimulator implements PropertyChangeListener {
                     }
                 }
                 else{
-                    //System.out.println(" - "  + name + " returned " + vinylTitles[index]);
                     try {
                         model.returnVinyl(vinylTitles[index], name);
                     }
@@ -54,7 +51,7 @@ public class PeopleSimulator implements PropertyChangeListener {
 
 
                 try {
-                    Thread.sleep(20000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     break;
                 }

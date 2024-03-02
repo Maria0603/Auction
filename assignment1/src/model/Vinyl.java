@@ -15,7 +15,7 @@ public class Vinyl{
         state = new VinylAvailable();
     }
 
-    public void Borrow(String customer){
+    public void borrowVinyl(String customer){
         state._borrow(this, customer);
     }
 
@@ -24,10 +24,10 @@ public class Vinyl{
         return getTitle() + ": (" + this.state + "), " + getBorrower() + " & " + getReserver();
     }
 
-    public void Return(String customer){
+    public void returnVinyl(String customer){
         state._return(this,customer);
     }
-    public void Reserve(String customer){
+    public void reserveVinyl(String customer){
         state._reserve(this,customer);
     }
     public String getStatus(){
@@ -36,11 +36,11 @@ public class Vinyl{
     protected void setState(VinylState state){
         this.state = state;
     }
-    private VinylState getState(){return state;}
+    public VinylState getState(){return state;}
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+       // if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vinyl vinyl = (Vinyl) o;
         return getTitle().equals(vinyl.getTitle()) && getArtist().equals(vinyl.getArtist()) && vinyl.getYear() == getYear();

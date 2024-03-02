@@ -60,5 +60,10 @@ public class VinylListViewController
     viewHandler.openView("manage");
 
   }
+  public void onRemovePress()
+  {
+    vinylListViewModel.setSelected(vinylTableView.getFocusModel().getFocusedItem());
+    vinylListViewModel.onRemovePress();
+  }
 
 }

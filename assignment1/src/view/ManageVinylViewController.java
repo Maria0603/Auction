@@ -57,7 +57,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());
@@ -71,7 +71,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());
@@ -85,7 +85,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());

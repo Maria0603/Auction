@@ -15,45 +15,44 @@ public class VinylList {
         return null;
     }
     public Vinyl getVinyl(int index){
-
-        if (album.get(index) != null) {
             return album.get(index);
-        }
-        else{
-            return null;
-        }
     }
     public void addVinyl(Vinyl vinyl){album.add(vinyl);}
     public void removeVinyl(Vinyl vinyl){album.remove(vinyl);}
-    public void Borrow(String title, String name){
+    public void borrowVinyl(String title, String name){
         for(Vinyl v : album){
             if(v.getTitle().equals(title)){
-                v.Borrow(name);
+                v.borrowVinyl(name);
+                break;
+
             }
         }
     }
 
 
-    public void Return(String title, String name){
+    public void returnVinyl(String title, String name){
         for(Vinyl v : album){
             if(v.getTitle().equals(title)){
-                v.Return(name);
+                v.returnVinyl(name);
+                break;
+
             }
         }
     }
 
 
-    public void Reserve(String title, String name){
+    public void reserveVinyl(String title, String name){
         for(Vinyl v : album){
             if(v.getTitle().equals(title)){
-                v.Reserve(name);
+                v.reserveVinyl(name);
+                break;
             }
         }
     }
 
 
 
-    public ArrayList<Vinyl> getAlbum() {
+    public ArrayList<Vinyl> getAllVinyls() {
         return album;
     }
 }

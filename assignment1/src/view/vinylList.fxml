@@ -7,30 +7,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
    <children>
-      <TableView fx:id="vinylTableView" layoutX="228.0" layoutY="36.0" prefHeight="266.0" prefWidth="640.0">
+      <TableView fx:id="vinylTableView" layoutX="152.0" layoutY="36.0" prefHeight="498.0" prefWidth="1038.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="126.0" text="Title" />
-            <TableColumn fx:id="artistColumn" prefWidth="125.0" text="Artist" />
-            <TableColumn fx:id="statusColumn" prefWidth="190.0" text="Status" />
-            <TableColumn fx:id="borrowerColumn" prefWidth="111.0" text="Borrower" />
-            <TableColumn fx:id="reserverColumn" prefWidth="87.0" text="Reserver" />
+          <TableColumn fx:id="titleColumn" prefWidth="331.99993896484375" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="276.800048828125" text="Artist" />
+            <TableColumn fx:id="statusColumn" prefWidth="192.0" text="Status" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="131.2000732421875" text="Borrower" />
+            <TableColumn fx:id="reserverColumn" prefWidth="108.0" text="Reserver" />
         </columns>
       </TableView>
-      <Label layoutX="35.0" layoutY="36.0" prefHeight="42.0" prefWidth="125.0" text="Vinyl Shop">
+      <Label layoutX="14.0" layoutY="21.0" prefHeight="42.0" prefWidth="140.0" text="Vinyl library">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="openButton" layoutX="27.0" layoutY="130.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="79.0" prefWidth="174.0" text="Manage">
+      <Button fx:id="openButton" layoutX="27.0" layoutY="94.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="50.0" prefWidth="109.0" text="Select">
          <font>
-            <Font name="System Bold Italic" size="24.0" />
+            <Font name="System Bold Italic" size="20.0" />
          </font></Button>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="11.0" layoutY="317.0" prefHeight="79.0" prefWidth="174.0" text="Error" textFill="#b14343">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="14.0" layoutY="534.0" prefHeight="79.0" prefWidth="174.0" text="Error" textFill="#b14343">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <Button fx:id="removeButton" layoutX="26.0" layoutY="161.0" mnemonicParsing="false" onAction="#onRemovePress" prefHeight="50.0" prefWidth="110.0" text="Remove">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

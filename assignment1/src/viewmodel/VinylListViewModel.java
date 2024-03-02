@@ -36,14 +36,17 @@ public class VinylListViewModel implements PropertyChangeListener
 
   private void loadFromModel(){
     list.clear();
-    for (int i = 0; i < model.getList().getAlbum().size(); i++) {
-      list.add(new VinylViewModel(model.getList().getAlbum().get(i)));
+    for (int i = 0; i < model.getList().getAllVinyls().size(); i++) {
+      list.add(new VinylViewModel(model.getList().getAllVinyls().get(i)));
+      if(list.get(i).getStatusProperty().get().equals("Available") && model.getVinyl(
+          list.get(i).getTitleProperty().get()).getState().getRemove())
+        onRemovePress();
     }
   }
 
   public void clear(){
     errorProperty.set("");
-    loadFromModel();
+    //loadFromModel();
   }
 
   public ObservableList<VinylViewModel> getAll() {
@@ -63,6 +66,16 @@ public class VinylListViewModel implements PropertyChangeListener
       viewState.setState(selectedVinylProperty.get().getStatusProperty().get());
       viewState.setArtist(selectedVinylProperty.get().getArtistProperty().get());
       viewState.setTitle(selectedVinylProperty.get().getTitleProperty().get());
+      viewState.setState(selectedVinylProperty.get().getStatusProperty().get());
+      loadFromModel();
+    }
+  }
+  public void onRemovePress()
+  {
+    if(selectedVinylProperty!=null)
+    {
+      model.removeVinyl(model.getVinyl(selectedVinylProperty.get().getTitleProperty().get()));
+      loadFromModel();
     }
   }
   private void setVinylState(String title, Vinyl vinyl){
@@ -78,8 +91,17 @@ public class VinylListViewModel implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt) {
     Platform.runLater(() ->{
-      setVinylState(evt.getOldValue().toString(), ((Vinyl) evt.getNewValue()));
+      if(evt.getPropertyName().equals("toBeRemoved"))
+      {
+        Vinyl vinyl=(Vinyl) evt.getNewValue();
+        vinyl.setTitle(evt.getOldValue()+ " - WILL BE REMOVED");
+        loadFromModel();
+        System.out.println("Hereee " + vinyl.getTitle());
+      }
+        else
+          setVinylState(evt.getOldValue().toString(), ((Vinyl) evt.getNewValue()));
     });
+    loadFromModel();
   }
 
 
