@@ -1,55 +1,55 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class VinylList
-{
-  private ArrayList<Vinyl> vinyls;
-
-  public VinylList(int capacity)
-  {
-    this.vinyls = new ArrayList<>(capacity);
-  }
-
-  public Vinyl getVinyl(String title)
-  {
-    for (Vinyl vinyl : vinyls)
-    {
-      if (vinyl.getTitle().equals(title))
-      {
-        return vinyl;
-      }
+public class VinylList {
+    private ArrayList<Vinyl> album;
+    public VinylList(){
+        album = new ArrayList<>();
     }
-    return null;
-  }
-  public Vinyl getVinyl(int index)
-  {
-    return vinyls.get(index);
-  }
-
-  public void addVinyl(Vinyl vinyl)
-  {
-    if (vinyls.size() < 10)
-      vinyls.add(vinyl);
-  }
-
-  public ArrayList<Vinyl> getAllVinyls()
-  {
-    return vinyls;
-  }
-
-  public void removeVinyl(Vinyl vinyl)
-  {
-    if (vinyl.getLendingStatus().equals("Available"))
-    {
-      vinyls.remove(vinyl);
+    public Vinyl getVinyl(String title){
+        for(Vinyl v : album){
+            if(v.getTitle().equals(title))
+                return v;
+        }
+        return null;
     }
-    else
-      getVinyl(vinyl.getTitle()).getLendingState().setScheduledForRemoval(true);
-  }
-  public int getSize()
-  {
-    return vinyls.size();
-  }
+    public void addVinyl(Vinyl vinyl){album.add(vinyl);}
+    public void removeVinyl(Vinyl vinyl){album.remove(vinyl);}
+    public void borrowVinyl(String title, String name){
+        for(Vinyl v : album){
+            if(v.getTitle().equals(title)){
+                v.borrowVinyl(name);
+                break;
+
+            }
+        }
+    }
+
+
+    public void returnVinyl(String title, String name){
+        for(Vinyl v : album){
+            if(v.getTitle().equals(title)){
+                v.returnVinyl(name);
+                break;
+
+            }
+        }
+    }
+
+
+    public void reserveVinyl(String title, String name){
+        for(Vinyl v : album){
+            if(v.getTitle().equals(title)){
+                v.reserveVinyl(name);
+                break;
+            }
+        }
+    }
+
+
+
+    public ArrayList<Vinyl> getAllVinyls() {
+        return album;
+    }
 }

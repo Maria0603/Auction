@@ -1,28 +1,42 @@
 package model;
 
-public class VinylBorrowed extends VinylState
-{
-
-  public VinylBorrowed(Customer borrower, Customer reserver)
-  {
-    super(borrower, reserver);
-  }
-  @Override public  synchronized void borrowVinyl(Vinyl vinyl, Customer customer)
-  {
-    throw new IllegalStateException("The vinyl is already borrowed");
-  }
-  @Override public synchronized  void returnVinyl(Vinyl vinyl, Customer customer)
-  {
-    if(super.getBorrower() != null && super.getBorrower().getName().equals(customer.getName()))
-    {
-      vinyl.setLendingState(new VinylAvailable(null, super.getReserver()));
+public class VinylBorrowed extends VinylState{
+    @Override
+    public void _borrow(Vinyl vinyl, String customer) {
+        throw new IllegalStateException("This vinyl is already borrowed");
     }
-    else throw new IllegalStateException("You are not the one who borrowed the vinyl");
-  }
-  @Override public synchronized  void reserveVinyl(Vinyl vinyl, Customer customer)
-  {
-    if(super.getBorrower()!=customer)
-     vinyl.setLendingState(new VinylReservedWhileBorrowed(super.getBorrower(), customer));
-    else throw new IllegalStateException("You already borrowed this vinyl");
-  }
+
+    @Override
+    public void _return(Vinyl vinyl, String borrower) {
+            if(vinyl.getBorrower().equals(borrower)){
+                vinyl.setState(new VinylAvailable());
+                vinyl.setBorrower(null);
+            }
+            else{
+                throw new IllegalStateException("You are not the borrower");
+            }
+    }
+
+    @Override
+    public void _reserve(Vinyl vinyl, String reserver) {
+        if(!vinyl.getToBeRemoved())
+        {
+            if (!vinyl.getBorrower().equals(reserver))
+            {
+                vinyl.setState(new VinylReservedWhileBorrowed());
+                vinyl.setReserver(reserver);
+            }
+            else
+            {
+                throw new IllegalStateException(
+                    "You have already borrowed this vinyl");
+            }
+        }
+        else throw new IllegalStateException("The vinyl will be removed");
+    }
+
+    @Override
+    public String getStatus() {
+        return "Borrowed";
+    }
 }

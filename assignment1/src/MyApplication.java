@@ -8,7 +8,7 @@ public class MyApplication extends Application
 {
   public void start(Stage primaryStage)
   {
-    VinylLibraryModel model = new VinylLibraryModelManager();
+    Model model = new ModelManager();
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);
     ViewHandler view = new ViewHandler(viewModelFactory);
 

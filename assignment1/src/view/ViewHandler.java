@@ -28,11 +28,9 @@ public class ViewHandler {
     switch (id) {
       case "list":
         root = loadListView("vinylList.fxml");
-        System.out.println(root);
         break;
       case "manage":
         root = loadManageView("manageVinyl.fxml");
-        System.out.println(root);
         break;
     }
     currentScene.setRoot(root);
@@ -43,13 +41,9 @@ public class ViewHandler {
 
     primaryStage.setTitle(title);
     primaryStage.setScene(currentScene);
-    //primaryStage.setWidth(root.getPrefWidth());
-    //primaryStage.setHeight(root.getPrefHeight());
+    primaryStage.setWidth(root.getPrefWidth());
+    primaryStage.setHeight(root.getPrefHeight() + 30);
     primaryStage.show();
-  }
-
-  public void closeView() {
-    primaryStage.close();
   }
 
   private Region loadListView(String fxmlFile) {
@@ -78,10 +72,9 @@ public class ViewHandler {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxmlFile));
         Region root = loader.load();
-        System.out.println(root);
         manageVinylViewController = loader.getController();
         manageVinylViewController.init(this,
-            viewModelFactory.getManageExerciseViewModel(), root);
+            viewModelFactory.getManageVinylViewModel(), root);
       }
       catch (Exception e) {
         e.printStackTrace();

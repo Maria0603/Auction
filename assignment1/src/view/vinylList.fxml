@@ -7,28 +7,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="1220.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VinylListViewController">
    <children>
-      <TableView fx:id="vinylTableView" layoutX="204.0" layoutY="36.0" prefHeight="198.0" prefWidth="375.0">
+      <TableView fx:id="vinylTableView" layoutX="152.0" layoutY="36.0" prefHeight="498.0" prefWidth="1038.0">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="155.20001220703125" text="Title" />
-            <TableColumn fx:id="artistColumn" prefWidth="119.20001220703125" text="Artist" />
-            <TableColumn fx:id="statusColumn" prefWidth="94.39996337890625" text="Status" />
+          <TableColumn fx:id="titleColumn" prefWidth="310.40000915527344" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="299.199951171875" text="Artist" />
+            <TableColumn fx:id="statusColumn" prefWidth="192.0" text="Status" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="118.40008544921875" text="Borrower" />
+            <TableColumn fx:id="reserverColumn" prefWidth="117.5999755859375" text="Reserved by" />
         </columns>
       </TableView>
-      <Label layoutX="35.0" layoutY="36.0" prefHeight="42.0" prefWidth="125.0" text="Vinyl Shop">
+      <Label layoutX="14.0" layoutY="21.0" prefHeight="42.0" prefWidth="140.0" text="Vinyl library">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="reserveButton" layoutX="35.0" layoutY="93.0" mnemonicParsing="false" onAction="#reservePressed" prefHeight="28.0" prefWidth="126.0" text="Reserve" />
-      <Button fx:id="borrowButton" layoutX="35.0" layoutY="135.0" mnemonicParsing="false" onAction="#borrowPressed" prefHeight="28.0" prefWidth="126.0" text="Borrow" />
-      <Button fx:id="returnButton" layoutX="35.0" layoutY="182.0" mnemonicParsing="false" onAction="#returnPressed" prefHeight="28.0" prefWidth="126.0" text="Return" />
-      <Label fx:id="errorLabel" layoutX="35.0" layoutY="242.0" prefHeight="26.0" prefWidth="385.0" text="Error" textFill="#b14343">
+      <Button fx:id="openButton" layoutX="27.0" layoutY="94.0" mnemonicParsing="false" onAction="#onButtonPress" prefHeight="50.0" prefWidth="109.0" text="Select">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font></Button>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="26.0" layoutY="563.0" prefHeight="50.0" prefWidth="896.0" text="Error" textFill="#b14343">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <Button fx:id="removeButton" layoutX="26.0" layoutY="161.0" mnemonicParsing="false" onAction="#onRemovePress" prefHeight="50.0" prefWidth="110.0" text="Remove">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

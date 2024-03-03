@@ -15,9 +15,8 @@ public class VinylListViewController
   public TableColumn<VinylViewModel, String> titleColumn;
   public TableColumn<VinylViewModel, String> artistColumn;
   public TableColumn<VinylViewModel, String> statusColumn;
-  public Button reserveButton;
-  public Button borrowButton;
-  public Button returnButton;
+  public TableColumn<VinylViewModel, String> borrowerColumn;
+  public TableColumn<VinylViewModel, String> reserverColumn;
   public Label errorLabel;
 
   private ViewHandler viewHandler;
@@ -35,26 +34,33 @@ public class VinylListViewController
         cellData -> cellData.getValue().getArtistProperty());
     statusColumn.setCellValueFactory(
         cellData -> cellData.getValue().getStatusProperty());
-
+    borrowerColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getBorrowerProperty());
+    reserverColumn.setCellValueFactory(
+            cellData -> cellData.getValue().getReserverProperty());
     vinylTableView.setItems(vinylListViewModel.getAll());
+
+    errorLabel.setText("");
 
   }
 
   public void reset(){
-
+    vinylListViewModel.clear();
   }
 
   public Region getRoot(){return root;}
 
-  public void reservePressed(ActionEvent actionEvent) {
+  public void onButtonPress() {
+
+    vinylListViewModel.setSelected(vinylTableView.getFocusModel().getFocusedItem());
+    vinylListViewModel.onButtonPress();
+    viewHandler.openView("manage");
 
   }
-
-  public void borrowPressed(ActionEvent actionEvent) {
-
+  public void onRemovePress()
+  {
+    vinylListViewModel.setSelected(vinylTableView.getFocusModel().getFocusedItem());
+    vinylListViewModel.onRemovePress();
   }
 
-  public void returnPressed(ActionEvent actionEvent) {
-
-  }
 }

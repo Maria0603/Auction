@@ -1,25 +1,31 @@
 package model;
 
-public class VinylReserved extends VinylState
-{
-  public VinylReserved(Customer borrower, Customer reserver)
-  {
-    super(borrower, reserver);
-  }
-  @Override public  synchronized void borrowVinyl(Vinyl vinyl, Customer customer)
-  {
-    if(customer.getName().equals(super.getReserver().getName()))
-    {
-      vinyl.setLendingState(new VinylBorrowed(customer, null));
+public class VinylReserved extends VinylState{
+    @Override
+    public void _borrow(Vinyl vinyl, String borrower) {
+        if(vinyl.getReserver().equals(borrower)){
+            vinyl.setBorrower(borrower);
+            vinyl.setReserver(null);
+            vinyl.setState(new VinylBorrowed());
+        }
+        else {
+            throw new IllegalStateException("You do not have a reservation for this vinyl");
+        }
+
     }
-    else throw new IllegalStateException("The vinyl is reserved by someone else");
-  }
-  @Override public synchronized  void returnVinyl(Vinyl vinyl, Customer customer)
-  {
-    throw new IllegalStateException("The vinyl is not borrowed");
-  }
-  @Override public synchronized  void reserveVinyl(Vinyl vinyl, Customer customer)
-  {
-    throw new IllegalStateException("The vinyl is already reserved by someone else");
-  }
+
+    @Override
+    public void _return(Vinyl vinyl, String borrower) {
+        throw new IllegalStateException("This vinyl is not borrowed");
+    }
+
+    @Override
+    public void _reserve(Vinyl vinyl, String reserver) {
+        throw new IllegalStateException("This vinyl is already reserved");
+    }
+
+    @Override
+    public String getStatus() {
+        return "Reserved";
+    }
 }
