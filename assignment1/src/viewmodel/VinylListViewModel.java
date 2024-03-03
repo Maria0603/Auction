@@ -50,13 +50,6 @@ public class VinylListViewModel implements PropertyChangeListener
     return list;
   }
 
-  public StringProperty getErrorProperty(){return errorProperty;}
-
-  public void setSelectedVinylProperty(VinylViewModel vinylViewModel){
-    this.selectedVinylProperty.set(vinylViewModel);
-  }
-
-  public ViewState getViewState(){return viewState;}
   public void setSelected(VinylViewModel vinyl){selectedVinylProperty.set(vinyl);}
   public void onButtonPress(){
     if (selectedVinylProperty != null) {
@@ -101,14 +94,4 @@ public class VinylListViewModel implements PropertyChangeListener
     loadFromModel();
   }
 
-
-//  public static void main(String[] args) {
-//    VinylLibraryModelManager model = new VinylLibraryModelManager();
-//    ViewModelFactory viewModelFactory = new ViewModelFactory(model);
-//
-//    for (int i = 0;
-//         i < viewModelFactory.getVinylListViewModel().list.size(); i++) {
-//      System.out.println(viewModelFactory.getVinylListViewModel().list.get(i).toString());
-//    }
-//  }
 }

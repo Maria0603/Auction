@@ -17,11 +17,6 @@ public class ManageVinylViewController
   @FXML private TextField artistField;
   @FXML private TextField statusField;
   @FXML private Label errorLabel;
-
-  @FXML private Button borrowButton;
-  @FXML private Button reserveButton;
-  @FXML private Button returnButton;
-
   private ViewHandler viewHandler;
   private ManageVinylViewModel manageViewModel;
   private Region root;

@@ -11,7 +11,6 @@ public class PeopleSimulator implements PropertyChangeListener {
 
         model.addListener(this);
 
-
         new Thread(() -> {
             String[] customers = {"Bob", "Wendy"};
             String[] vinylTitles = new String[model.getList().getAllVinyls().size()];
@@ -30,14 +29,16 @@ public class PeopleSimulator implements PropertyChangeListener {
                         model.borrowVinyl(vinylTitles[index], name);
                     }
                     catch (IllegalStateException e){
-                        System.out.println(e.getMessage());
+                        //  UN-OUT-COMMENT THE FOLLOWING LINE TO SEE THE ERRORS GOT BY THE ROBOTS
+                        //System.out.println(e.getMessage());
                     }
                 } else if (rand > 0.33 && rand < 0.66) {
                     try{
                         model.reserveVinyl(vinylTitles[index], name);
                     }
                     catch (IllegalStateException e){
-                        System.out.println(e.getMessage());
+                        //  UN-OUT-COMMENT THE FOLLOWING LINE TO SEE THE ERRORS GOT BY THE ROBOTS
+                        //System.out.println(e.getMessage());
                     }
                 }
                 else{
@@ -45,7 +46,8 @@ public class PeopleSimulator implements PropertyChangeListener {
                         model.returnVinyl(vinylTitles[index], name);
                     }
                     catch (IllegalStateException e){
-                        System.out.println(e.getMessage());
+                        //  UN-OUT-COMMENT THE FOLLOWING LINE TO SEE THE ERRORS GOT BY THE ROBOTS
+                        //System.out.println(e.getMessage());
                     }
                 }
 
@@ -61,6 +63,7 @@ public class PeopleSimulator implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println(" -- > " + evt.getPropertyName() + ": " + evt.getOldValue() + ", " + evt.getNewValue());
+        //  UN-OUT-COMMENT THE FOLLOWING LINE TO SEE THE EVENTS FIRE IN THE CONSOLE
+       // System.out.println(" -- > " + evt.getPropertyName() + ": " + evt.getOldValue() + ", " + evt.getNewValue());
     }
 }

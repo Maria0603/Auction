@@ -27,7 +27,7 @@
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font></Button>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="14.0" layoutY="534.0" prefHeight="79.0" prefWidth="174.0" text="Error" textFill="#b14343">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="26.0" layoutY="563.0" prefHeight="50.0" prefWidth="896.0" text="Error" textFill="#b14343">
          <font>
             <Font size="17.0" />
          </font>

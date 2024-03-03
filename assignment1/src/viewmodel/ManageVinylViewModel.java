@@ -13,8 +13,6 @@ public class ManageVinylViewModel
 {
   public StringProperty nameProperty, titleProperty, artistProperty, statusProperty, errorProperty;
 
-  private ObjectProperty<Boolean> editableProperty;
-
   private Model model;
   private ViewState viewState;
 
@@ -28,11 +26,6 @@ public class ManageVinylViewModel
     artistProperty = new SimpleStringProperty();
     statusProperty = new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
-    editableProperty = new SimpleObjectProperty<>();
-
-
-
-
   }
 
   public ViewState getViewState(){return viewState;}

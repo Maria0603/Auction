@@ -14,9 +14,6 @@ public class VinylList {
         }
         return null;
     }
-    public Vinyl getVinyl(int index){
-            return album.get(index);
-    }
     public void addVinyl(Vinyl vinyl){album.add(vinyl);}
     public void removeVinyl(Vinyl vinyl){album.remove(vinyl);}
     public void borrowVinyl(String title, String name){

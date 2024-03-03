@@ -18,8 +18,8 @@ public class ModelManager implements Model{
         list.addVinyl(new Vinyl("If I die tonight", "Tupac", 1995));
         list.addVinyl(new Vinyl("Big Poppa", "Notorious BIG", 1996));
         list.addVinyl(new Vinyl("Listen Closely", "Four Owls", 2003));
-      //  list.addVinyl(new Vinyl("Please be quiet", "Pink guy", 2010));
-        //list.addVinyl(new Vinyl("Eat my soul", "@(Q*!@_#!", 2066));
+        list.addVinyl(new Vinyl("Please be quiet", "Pink guy", 2010));
+        list.addVinyl(new Vinyl("Eat my soul", "@(Q*!@_#!", 2066));
     }
 
 
@@ -38,14 +38,18 @@ public class ModelManager implements Model{
     }
     @Override
     public void removeVinyl(Vinyl vinyl){
-        if(vinyl.getStatus().equals("Available"))
+        if(vinyl!=null)
         {
-            list.removeVinyl(vinyl);
-        }
+            if(vinyl.getStatus().equals("Available"))
+            {
+                list.removeVinyl(vinyl);
+            }
         else
-        {
-            vinyl.setToBeRemoved(true);
-            property.firePropertyChange("toBeRemoved", vinyl.getTitle(), vinyl);
+            {
+                vinyl.setToBeRemoved(true);
+                property.firePropertyChange("toBeRemoved", vinyl.getTitle(),
+                    vinyl);
+            }
         }
     }
     @Override
