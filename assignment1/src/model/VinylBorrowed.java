@@ -19,7 +19,7 @@ public class VinylBorrowed extends VinylState{
 
     @Override
     public void _reserve(Vinyl vinyl, String reserver) {
-        if(!vinyl.getState().getRemove())
+        if(!vinyl.getToBeRemoved())
         {
             if (!vinyl.getBorrower().equals(reserver))
             {

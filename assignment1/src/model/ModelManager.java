@@ -32,7 +32,7 @@ public class ModelManager implements Model{
 
     @Override
     public void addVinyl(Vinyl vinyl) {
-        if(list.getAllVinyls().size() <= 10){
+        if(list.getAllVinyls().size() < 10){
             list.addVinyl(vinyl);
         }
     }
@@ -44,7 +44,7 @@ public class ModelManager implements Model{
         }
         else
         {
-            vinyl.getState().setRemove(true);
+            vinyl.setToBeRemoved(true);
             property.firePropertyChange("toBeRemoved", vinyl.getTitle(), vinyl);
         }
     }

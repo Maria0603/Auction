@@ -28,10 +28,8 @@ public class VinylListViewModel implements PropertyChangeListener
     this.list = FXCollections.observableArrayList();
     this.selectedVinylProperty = new SimpleObjectProperty<>();
     this.errorProperty = new SimpleStringProperty();
-
     loadFromModel();
     model.addListener(this);
-
   }
 
   private void loadFromModel(){
@@ -39,7 +37,7 @@ public class VinylListViewModel implements PropertyChangeListener
     for (int i = 0; i < model.getList().getAllVinyls().size(); i++) {
       list.add(new VinylViewModel(model.getList().getAllVinyls().get(i)));
       if(list.get(i).getStatusProperty().get().equals("Available") && model.getVinyl(
-          list.get(i).getTitleProperty().get()).getState().getRemove())
+          list.get(i).getTitleProperty().get()).getToBeRemoved())
         onRemovePress();
     }
   }
@@ -94,9 +92,8 @@ public class VinylListViewModel implements PropertyChangeListener
       if(evt.getPropertyName().equals("toBeRemoved"))
       {
         Vinyl vinyl=(Vinyl) evt.getNewValue();
-        vinyl.setTitle(evt.getOldValue()+ " - WILL BE REMOVED");
+        vinyl.setArtist(vinyl.getArtist() + " - THIS VINYL WILL BE REMOVED");
         loadFromModel();
-        System.out.println("Hereee " + vinyl.getTitle());
       }
         else
           setVinylState(evt.getOldValue().toString(), ((Vinyl) evt.getNewValue()));

@@ -51,7 +51,7 @@ public class PeopleSimulator implements PropertyChangeListener {
 
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     break;
                 }

@@ -12,6 +12,7 @@ public class VinylViewModel
   private StringProperty borrowerProperty;
   private StringProperty stateProperty;
   private StringProperty reserverProperty;
+  private StringProperty accessibleProperty;
 
   public VinylViewModel(Vinyl vinyl){
     titleProperty = new SimpleStringProperty(vinyl.getTitle());
@@ -21,8 +22,17 @@ public class VinylViewModel
     borrowerProperty = new SimpleStringProperty(vinyl.getBorrower());
     reserverProperty = new SimpleStringProperty(vinyl.getReserver());
     stateProperty = new SimpleStringProperty(vinyl.getStatus());
+    accessibleProperty=new SimpleStringProperty();
+    accessibleProperty.set("Yes");
   }
-
+  public StringProperty getAccessibleProperty()
+  {
+    return accessibleProperty;
+  }
+  public void setAccessibleProperty(String access)
+  {
+    accessibleProperty.set(access);
+  }
   public StringProperty getTitleProperty() {
     return titleProperty;
   }

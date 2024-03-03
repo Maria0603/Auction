@@ -6,6 +6,7 @@ package model;
 public class Vinyl{
     private String title, artist;
     private String borrower, reserver;
+    private boolean toBeRemoved;
     private int year;
     private VinylState state;
     public Vinyl(String title, String artist, int year){
@@ -13,6 +14,17 @@ public class Vinyl{
         this.artist = artist;
         this.year = year;
         state = new VinylAvailable();
+        toBeRemoved=false;
+        borrower=null;
+        reserver=null;
+    }
+    public void setToBeRemoved(boolean remove)
+    {
+        toBeRemoved=remove;
+    }
+    public boolean getToBeRemoved()
+    {
+        return toBeRemoved;
     }
 
     public void borrowVinyl(String customer){
@@ -40,7 +52,6 @@ public class Vinyl{
 
     @Override
     public boolean equals(Object o) {
-       // if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vinyl vinyl = (Vinyl) o;
         return getTitle().equals(vinyl.getTitle()) && getArtist().equals(vinyl.getArtist()) && vinyl.getYear() == getYear();
@@ -68,9 +79,6 @@ public class Vinyl{
 
     public void setYear(int year) {
         this.year = year;
-    }
-    public String status(){
-        return state.getClass().getSimpleName() + ", borw: " + getBorrower() + ", reserver: " + getReserver();
     }
 
     public String getBorrower() {
