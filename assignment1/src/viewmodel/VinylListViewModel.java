@@ -44,7 +44,6 @@ public class VinylListViewModel implements PropertyChangeListener
 
   public void clear(){
     errorProperty.set("");
-    //loadFromModel();
   }
 
   public ObservableList<VinylViewModel> getAll() {
@@ -92,7 +91,8 @@ public class VinylListViewModel implements PropertyChangeListener
       if(evt.getPropertyName().equals("toBeRemoved"))
       {
         Vinyl vinyl=(Vinyl) evt.getNewValue();
-        vinyl.setArtist(vinyl.getArtist() + " - THIS VINYL WILL BE REMOVED");
+        if(!vinyl.getArtist().endsWith(" - THIS VINYL WILL BE REMOVED"))
+          vinyl.setArtist(vinyl.getArtist() + " - THIS VINYL WILL BE REMOVED");
         loadFromModel();
       }
         else
