@@ -17,11 +17,6 @@ public class ManageVinylViewController
   @FXML private TextField artistField;
   @FXML private TextField statusField;
   @FXML private Label errorLabel;
-
-  @FXML private Button borrowButton;
-  @FXML private Button reserveButton;
-  @FXML private Button returnButton;
-
   private ViewHandler viewHandler;
   private ManageVinylViewModel manageViewModel;
   private Region root;
@@ -57,7 +52,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());
@@ -71,7 +66,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());
@@ -85,7 +80,7 @@ public class ManageVinylViewController
         viewHandler.openView("list");
       }
       else{
-        errorLabel.setText("No name Inserted");
+        errorLabel.setText("No name inserted");
       }
     } catch (IllegalStateException e){
       errorLabel.setText(e.getMessage());

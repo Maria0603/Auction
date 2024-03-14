@@ -19,7 +19,7 @@ public class ViewModelFactory
     return vinylListViewModel;
   }
 
-  public ManageVinylViewModel getManageExerciseViewModel() {
+  public ManageVinylViewModel getManageVinylViewModel() {
     return manageVinylViewModel;
   }
 }

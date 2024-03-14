@@ -10,7 +10,7 @@ public class ModelManager implements Model{
         list = new VinylList();
         property = new PropertyChangeSupport(this);
         createDummyData();
-        startPeopleSimulation();
+        new PeopleSimulator(this);
     }
 
     private void createDummyData(){
@@ -19,12 +19,9 @@ public class ModelManager implements Model{
         list.addVinyl(new Vinyl("Big Poppa", "Notorious BIG", 1996));
         list.addVinyl(new Vinyl("Listen Closely", "Four Owls", 2003));
         list.addVinyl(new Vinyl("Please be quiet", "Pink guy", 2010));
-        list.addVinyl(new Vinyl("eat my pie", "@(Q*!@_#!", 2066));
+        list.addVinyl(new Vinyl("Eat my soul", "@(Q*!@_#!", 2066));
     }
 
-    public void startPeopleSimulation(){
-        new PeopleSimulator(this);
-    }
 
     @Override
     public VinylList getList(){return list;}
@@ -34,30 +31,40 @@ public class ModelManager implements Model{
     }
 
     @Override
-    public void addVinyl(Vinyl vinyl){
-        if(list.getAlbum().size() <= 10){
+    public void addVinyl(Vinyl vinyl) {
+        if(list.getAllVinyls().size() < 10){
             list.addVinyl(vinyl);
         }
     }
     @Override
     public void removeVinyl(Vinyl vinyl){
-        //  FlagVinyl before removal
-        list.removeVinyl(vinyl);
-
+        if(vinyl!=null)
+        {
+            if(vinyl.getStatus().equals("Available"))
+            {
+                list.removeVinyl(vinyl);
+            }
+        else
+            {
+                vinyl.setToBeRemoved(true);
+                property.firePropertyChange("toBeRemoved", vinyl.getTitle(),
+                    vinyl);
+            }
+        }
     }
     @Override
     public void borrowVinyl(String title, String name){
-        list.Borrow(title, name);
+        list.borrowVinyl(title, name);
         property.firePropertyChange("borrow",title,getVinyl(title));
     }
     @Override
     public void returnVinyl(String title, String name){
-        list.Return(title, name);
+        list.returnVinyl(title, name);
         property.firePropertyChange("return",title,getVinyl(title));
     }
     @Override
     public void reserveVinyl(String title, String name){
-        list.Reserve(title, name);
+        list.reserveVinyl(title, name);
         property.firePropertyChange("reserve",title,getVinyl(title));
     }
 

@@ -17,9 +17,6 @@ public class VinylListViewController
   public TableColumn<VinylViewModel, String> statusColumn;
   public TableColumn<VinylViewModel, String> borrowerColumn;
   public TableColumn<VinylViewModel, String> reserverColumn;
-  public Button reserveButton;
-  public Button borrowButton;
-  public Button returnButton;
   public Label errorLabel;
 
   private ViewHandler viewHandler;
@@ -59,6 +56,11 @@ public class VinylListViewController
     vinylListViewModel.onButtonPress();
     viewHandler.openView("manage");
 
+  }
+  public void onRemovePress()
+  {
+    vinylListViewModel.setSelected(vinylTableView.getFocusModel().getFocusedItem());
+    vinylListViewModel.onRemovePress();
   }
 
 }

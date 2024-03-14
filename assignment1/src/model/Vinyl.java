@@ -6,6 +6,7 @@ package model;
 public class Vinyl{
     private String title, artist;
     private String borrower, reserver;
+    private boolean toBeRemoved;
     private int year;
     private VinylState state;
     public Vinyl(String title, String artist, int year){
@@ -13,9 +14,20 @@ public class Vinyl{
         this.artist = artist;
         this.year = year;
         state = new VinylAvailable();
+        toBeRemoved=false;
+        borrower=null;
+        reserver=null;
+    }
+    public void setToBeRemoved(boolean remove)
+    {
+        toBeRemoved=remove;
+    }
+    public boolean getToBeRemoved()
+    {
+        return toBeRemoved;
     }
 
-    public void Borrow(String customer){
+    public void borrowVinyl(String customer){
         state._borrow(this, customer);
     }
 
@@ -24,10 +36,10 @@ public class Vinyl{
         return getTitle() + ": (" + this.state + "), " + getBorrower() + " & " + getReserver();
     }
 
-    public void Return(String customer){
+    public void returnVinyl(String customer){
         state._return(this,customer);
     }
-    public void Reserve(String customer){
+    public void reserveVinyl(String customer){
         state._reserve(this,customer);
     }
     public String getStatus(){
@@ -36,11 +48,10 @@ public class Vinyl{
     protected void setState(VinylState state){
         this.state = state;
     }
-    private VinylState getState(){return state;}
+    public VinylState getState(){return state;}
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vinyl vinyl = (Vinyl) o;
         return getTitle().equals(vinyl.getTitle()) && getArtist().equals(vinyl.getArtist()) && vinyl.getYear() == getYear();
@@ -48,10 +59,6 @@ public class Vinyl{
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getArtist() {
@@ -64,13 +71,6 @@ public class Vinyl{
 
     public int getYear() {
         return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-    public String status(){
-        return state.getClass().getSimpleName() + ", borw: " + getBorrower() + ", reserver: " + getReserver();
     }
 
     public String getBorrower() {
