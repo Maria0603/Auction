@@ -4,9 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.layout.Region;
 import model.ChatModel;
-import model.ConstructionCompanyModel;
 import view.ViewHandler;
-import view.ViewState;
+
 
 public class ChatViewModel
 {
