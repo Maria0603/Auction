@@ -4,8 +4,12 @@ public class ChatModelManager implements ChatModel
 {
   private Conversation conversation;
   private UserList userList;
+
+  public ChatModelManager() {
+    this.userList = new UserList("","");
+  }
   @Override public void send(String username, String message) {
-    MessagePackage messagePackage = new MessagePackage(username, message, null);
+    MessagePackage messagePackage = new MessagePackage(username, message, "");
     conversation.addPackage(messagePackage);
   }
 
