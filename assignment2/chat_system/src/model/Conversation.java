@@ -9,6 +9,7 @@ public class Conversation {
 
   public Conversation() {
     packages = new ArrayList<>();
+    conversationContent = "";
   }
 
   public void addPackage(Package pack) {
