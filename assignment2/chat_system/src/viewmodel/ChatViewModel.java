@@ -2,9 +2,7 @@ package viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.layout.Region;
 import model.ChatModel;
-import view.ViewHandler;
 
 
 public class ChatViewModel
