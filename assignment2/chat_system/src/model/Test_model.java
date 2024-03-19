@@ -14,7 +14,12 @@ public class Test_model {
     System.out.println("Whole conversation:\n" + wholeConversation);
     chatModelManager.createUser("User2", "password\n");
 
+    chatModelManager.send("User1", "/time");
+
+    wholeConversation = chatModelManager.getWholeConversation();
+
     Logger.getInstance().extractLastMessageAndReply(wholeConversation);
+    Logger.getInstance().extractOnlyMessages(wholeConversation);
 
   }
 }

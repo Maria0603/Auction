@@ -2,6 +2,8 @@ package model;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -51,6 +53,29 @@ public class Logger {
 
     System.out.println("Last Message: " + lastMessage);
     System.out.println("Last Reply: " + lastReply);
+  }
+
+  public String extractOnlyMessages(String conversation){
+    // Split the conversation string into messages with newline character as the delimiter
+    String[] lines = conversation.split("\\r?\\n");
+    List<String> messages = new ArrayList<>();
+
+    // Iterate over the lines and filter out the replies
+    for (String line : lines) {
+      if (line.contains(":") && !line.startsWith("Reply:")) {
+        messages.add(line);
+      }
+    }
+
+    String output = "";
+    // Print the extracted messages
+    System.out.println("Extracted Messages:");
+    for (String message : messages) {
+      output += message + "\n";
+      System.out.println(message);
+    }
+
+    return output;
   }
 
 }

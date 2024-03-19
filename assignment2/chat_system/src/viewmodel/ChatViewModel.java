@@ -3,7 +3,7 @@ package viewmodel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.ChatModel;
-
+import model.Logger;
 
 public class ChatViewModel
 {
@@ -61,7 +61,8 @@ public class ChatViewModel
       clear();
 
       //reload the updated conversation
-      listProperty.set(model.getWholeConversation());
+      String updatedConversation = model.getWholeConversation();
+      listProperty.set(Logger.getInstance().extractOnlyMessages(updatedConversation));
     }
     catch(Exception e)
     {
