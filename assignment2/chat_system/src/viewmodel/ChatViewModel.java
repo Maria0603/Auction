@@ -18,7 +18,7 @@ public class ChatViewModel
     viewModelState=state;
     headerProperty=new SimpleStringProperty();
     //headerProperty.set(viewModelState.getUsername());
-    headerProperty.set(viewModelState.getUsername());
+    headerProperty.set("bob_cutie");
     inputProperty=new SimpleStringProperty();
     errorProperty=new SimpleStringProperty();
     listProperty=new SimpleStringProperty();
@@ -72,5 +72,10 @@ public class ChatViewModel
     listProperty.set(null);
     inputProperty.set(null);
     errorProperty.set(null);
+  }
+
+
+  public void reset() {
+    headerProperty.set(viewModelState.getUsername());
   }
 }

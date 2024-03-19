@@ -28,10 +28,12 @@ public class ChatViewController
     chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
+
+    reset();
   }
   public void reset()
   {
-    chatViewModel.clear();
+    chatViewModel.reset();
   }
 
   public Region getRoot()
