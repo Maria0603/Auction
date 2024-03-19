@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73f27bf3-9147-419b-b7e4-be17b595aa0d" name="Changes" comment="ChatViewController and ChatViewModel">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="73f27bf3-9147-419b-b7e4-be17b595aa0d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/chat_system/src/model/ChatModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/src/model/ChatModelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/src/view/ChatViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/src/view/ViewHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/src/viewmodel/ChatViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/src/viewmodel/ViewModelState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_system/src/model/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/src/model/ChatModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_system/src/model/ChatModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/src/model/ChatModelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_system/src/view/ChatViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/src/view/ChatViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_system/src/viewmodel/ChatViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/src/viewmodel/ChatViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +46,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "connect__windows__masha",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/Asus TUF/IdeaProjects/Workspace S2/S10/NetworkPackage",
+    "last_opened_file_path": "C:/Users/Asus TUF/Desktop/Courses1/SEP1/SEP1 Project/AppendicesGroup9/SourceCode",
     "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -74,19 +75,6 @@
       <option name="presentableId" value="Default" />
       <updated>1710410711530</updated>
     </task>
-    <task id="LOCAL-00001" summary="ChatViewController and ChatViewModel">
-      <option name="closed" value="true" />
-      <created>1710481568442</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1710481568442</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="ChatViewController and ChatViewModel" />
-    <option name="LAST_COMMIT_MESSAGE" value="ChatViewController and ChatViewModel" />
   </component>
 </project>

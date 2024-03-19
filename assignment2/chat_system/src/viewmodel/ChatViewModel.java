@@ -2,13 +2,12 @@ package viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.layout.Region;
 import model.ChatModel;
 import view.ViewHandler;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class ChatViewModel implements PropertyChangeListener
+public class ChatViewModel
 {
   private StringProperty headerProperty, inputProperty, errorProperty, listProperty;
   private ChatModel model;
@@ -24,7 +23,6 @@ public class ChatViewModel implements PropertyChangeListener
     inputProperty=new SimpleStringProperty();
     errorProperty=new SimpleStringProperty();
     listProperty=new SimpleStringProperty();
-    model.addListener("message", this);
   }
   public StringProperty getInputProperty()
   {
@@ -52,13 +50,13 @@ public class ChatViewModel implements PropertyChangeListener
     try
     {
       //send the user and their message, to update the conversation
-      model.send(headerProperty.get(), inputProperty.get().trim(), errorProperty.get());
+      model.send(headerProperty.get(), inputProperty.get());
 
       //clear the error label and the input field
       clear();
 
       //reload the updated conversation
-      listProperty.set(model.getConversationContent());
+      listProperty.set(model.getWholeConversation());
     }
     catch(Exception e)
     {
@@ -70,10 +68,5 @@ public class ChatViewModel implements PropertyChangeListener
     listProperty.set(null);
     inputProperty.set(null);
     errorProperty.set(null);
-  }
-
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    listProperty.set(model.getConversationContent());
   }
 }
