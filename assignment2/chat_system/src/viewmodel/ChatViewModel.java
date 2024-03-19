@@ -51,7 +51,7 @@ public class ChatViewModel implements PropertyChangeListener
     try
     {
       //send the user and their message, to update the conversation
-      model.send(headerProperty.get(), inputProperty.get(), errorProperty.get());
+      model.send(headerProperty.get(), inputProperty.get().trim(), errorProperty.get());
 
       //clear the error label and the input field
       clear();
