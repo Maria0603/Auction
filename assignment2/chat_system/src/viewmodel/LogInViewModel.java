@@ -30,6 +30,8 @@ public class LogInViewModel {
 
         try {
             model.createUser(getUsernameProperty().get(), getPasswordProperty().get());
+            viewModelState.setUsername(getUsernameProperty().get());
+            System.out.println(getUsernameProperty().get());
         } catch (Exception e) {
             errorProperty.set(e.getMessage());
         }

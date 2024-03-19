@@ -17,11 +17,17 @@ public class ChatViewModel
     this.model=model;
     viewModelState=state;
     headerProperty=new SimpleStringProperty();
+    //headerProperty.set(viewModelState.getUsername());
     headerProperty.set(viewModelState.getUsername());
     inputProperty=new SimpleStringProperty();
     errorProperty=new SimpleStringProperty();
     listProperty=new SimpleStringProperty();
   }
+
+  public void setHeaderProperty(String headerProperty) {
+    this.headerProperty.set(headerProperty);
+  }
+
   public StringProperty getInputProperty()
   {
     return inputProperty;

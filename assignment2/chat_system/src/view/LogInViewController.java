@@ -40,5 +40,7 @@ public class LogInViewController {
     @FXML
     public void logInPressed() {
         logInViewModel.createUser();
+
+        viewHandler.openView("chat");
     }
 }

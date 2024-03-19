@@ -20,4 +20,8 @@ public class UserList
     users.add(user);
   }
 
+  @Override public String toString() {
+    return "UserList{" + "users=" + users + ", username='" + username + '\''
+        + ", password='" + password + '\'' + '}';
+  }
 }

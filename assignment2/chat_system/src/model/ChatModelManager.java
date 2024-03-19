@@ -21,10 +21,13 @@ public class ChatModelManager implements ChatModel
   @Override public void createUser(String username, String password)
   {
     userList.addUser(username, password);
+    System.out.println(userList.toString());
   }
 
   public void setConversation(Conversation conversation)
   {
     this.conversation = conversation;
   }
+
+
 }
