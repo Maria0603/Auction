@@ -12,7 +12,9 @@ public class Test_model {
 
     String wholeConversation = chatModelManager.getWholeConversation();
     System.out.println("Whole conversation:\n" + wholeConversation);
-    chatModelManager.createUser("User2", "password");
+    chatModelManager.createUser("User2", "password\n");
+
+    Logger.getInstance().extractLastMessageAndReply(wholeConversation);
 
   }
 }
