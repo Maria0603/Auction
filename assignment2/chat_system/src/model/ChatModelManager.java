@@ -7,10 +7,12 @@ public class ChatModelManager implements ChatModel
 
   public ChatModelManager() {
     this.userList = new UserList("","");
+    conversation = new Conversation();
   }
   @Override public void send(String username, String message) {
     MessagePackage messagePackage = new MessagePackage(username, message, "");
     conversation.addPackage(messagePackage);
+    System.out.println(messagePackage);
   }
 
   @Override public String getWholeConversation()

@@ -55,6 +55,7 @@ public class ChatViewModel
     {
       //send the user and their message, to update the conversation
       model.send(headerProperty.get(), inputProperty.get());
+      System.out.println(headerProperty.get() + " " + inputProperty.get());
 
       //clear the error label and the input field
       clear();

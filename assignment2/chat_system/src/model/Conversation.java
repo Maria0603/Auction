@@ -13,7 +13,7 @@ public class Conversation {
 
   public void addPackage(Package pack) {
     packages.add(pack);
-    conversationContent = conversationContent + '\n' + pack.toString();
+    conversationContent += "\n" + pack.toString();
   }
 
   public String getConversationContent() {
