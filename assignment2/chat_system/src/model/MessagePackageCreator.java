@@ -3,16 +3,19 @@ package model;
 public class MessagePackageCreator extends PackageCreator {
 
   @Override
-  protected void createPackage(String sender, String request, String reply) {
-    if (request.isEmpty()) {
-      reply = "No input";
-    } else {
-      reply = null;
+  protected Package createPackage(String sender, String request, Object reply)
+  {
+    if (reply == null)
+    {
+      if (request.isEmpty())
+      {
+        return new MessagePackage(sender, request, "No input");
+      }
+      else
+      {
+        return new MessagePackage(sender, request, null);
+      }
     }
-    if (reply != null) {
-      new MessagePackage(sender, request, reply);
-    } else {
-      new MessagePackage(sender, request, null);
-    }
+    return null;
   }
 }

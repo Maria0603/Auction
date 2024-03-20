@@ -17,7 +17,7 @@ public class CommandPackage extends Package
 
   @Override public String toString()
   {
-    return "Command from " + getSender() + ": " + command + "\nReply: " + reply;
+     return "Command from " + getSender() + ": " + command + "\nReply: " + reply;
   }
 
   public String getCommand()

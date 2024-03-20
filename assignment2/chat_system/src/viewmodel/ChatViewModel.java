@@ -5,7 +5,10 @@ import javafx.beans.property.StringProperty;
 import model.ChatModel;
 import model.Logger;
 
-public class ChatViewModel
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ChatViewModel implements PropertyChangeListener
 {
   private StringProperty headerProperty, inputProperty, errorProperty, listProperty;
   private ChatModel model;
@@ -17,11 +20,10 @@ public class ChatViewModel
     this.model=model;
     viewModelState=state;
     headerProperty=new SimpleStringProperty();
-    //headerProperty.set(viewModelState.getUsername());
-    headerProperty.set("bob_cutie");
     inputProperty=new SimpleStringProperty();
     errorProperty=new SimpleStringProperty();
     listProperty=new SimpleStringProperty();
+    model.addListener("Message", this);
   }
 
   public void setHeaderProperty(String headerProperty) {
@@ -55,7 +57,7 @@ public class ChatViewModel
     {
       //send the user and their message, to update the conversation
       model.send(headerProperty.get(), inputProperty.get());
-      System.out.println(headerProperty.get() + " " + inputProperty.get());
+      //System.out.println(headerProperty.get() + " " + inputProperty.get());
 
       //clear the error label and the input field
       clear();
@@ -79,5 +81,10 @@ public class ChatViewModel
 
   public void reset() {
     headerProperty.set(viewModelState.getUsername());
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+
   }
 }

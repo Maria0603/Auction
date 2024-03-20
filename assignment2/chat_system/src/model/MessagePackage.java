@@ -13,7 +13,9 @@ public class MessagePackage extends Package
 
   @Override public String toString()
   {
-    return "Message from " + getSender() + ": " + textContent + "\nReply: " + reply;
+    if(reply==null)
+      return "Message from " + getSender() + ": " + textContent + "\n";
+    else throw new IllegalArgumentException(reply);
   }
 
   public String getTextContent()

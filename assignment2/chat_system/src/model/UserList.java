@@ -5,23 +5,28 @@ import java.util.ArrayList;
 public class UserList
 {
   private ArrayList<String> users;
-  private String username, password;
+  private PasswordChecker checker;
 
-  public UserList(String username, String password)
+  public UserList()
   {
     users = new ArrayList<>();
-    this.username = username;
-    this.password = password;
+    checker=new PasswordChecker();
+  }
+  public int getSize()
+  {
+    return users.size();
   }
 
-  public void addUser(String username, String password)
+  public void addUser(String username, String password) throws IllegalArgumentException
   {
-    String user = username + ":" + password;
-    users.add(user);
+      checker.check(password);
+      users.add(username);
   }
 
   @Override public String toString() {
-    return "UserList{" + "users=" + users + ", username='" + username + '\''
-        + ", password='" + password + '\'' + '}';
+    String userList="Users: \n";
+    for(int i=0; i< users.size(); i++)
+      userList=userList+users.get(i)+'\n';
+    return userList;
   }
 }

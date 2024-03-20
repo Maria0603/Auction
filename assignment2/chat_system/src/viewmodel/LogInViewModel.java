@@ -27,12 +27,12 @@ public class LogInViewModel {
     }
 
     public void createUser() {
-
+        errorProperty.set("");
         try {
             model.createUser(getUsernameProperty().get(), getPasswordProperty().get());
             viewModelState.setUsername(getUsernameProperty().get());
             //System.out.println(viewModelState.getUsername());
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             errorProperty.set(e.getMessage());
         }
     }
