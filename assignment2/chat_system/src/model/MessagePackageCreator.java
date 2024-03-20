@@ -9,7 +9,7 @@ public class MessagePackageCreator extends PackageCreator {
     {
       if (request.isEmpty())
       {
-        return new MessagePackage(sender, request, "No input");
+        throw new IllegalArgumentException("No input");
       }
       else
       {

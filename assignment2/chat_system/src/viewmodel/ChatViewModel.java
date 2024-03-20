@@ -53,18 +53,25 @@ public class ChatViewModel implements PropertyChangeListener
   //functionality for the Send button
   public void send()
   {
+    /*
+    dd/mm/yyyy hh:mm Username: message
+    dd/mm/yyyy hh"mm Username: command
+    Reply
+     */
     try
     {
       //send the user and their message, to update the conversation
-      model.send(headerProperty.get(), inputProperty.get());
+      if(inputProperty.get()==null)
+        model.send(headerProperty.get(), "");
+      else model.send(headerProperty.get(), inputProperty.get().trim());
       //System.out.println(headerProperty.get() + " " + inputProperty.get());
-
       //clear the error label and the input field
       clear();
 
       //reload the updated conversation
       String updatedConversation = model.getWholeConversation();
-      listProperty.set(Logger.getInstance().extractOnlyMessages(updatedConversation));
+      //listProperty.set(Logger.getInstance().extractOnlyMessages(updatedConversation));
+      listProperty.set(updatedConversation);
     }
     catch(Exception e)
     {

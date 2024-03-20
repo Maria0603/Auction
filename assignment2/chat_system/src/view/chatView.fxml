@@ -20,7 +20,7 @@
          <font>
             <Font size="16.0" />
          </font></TextArea>
-      <TextField fx:id="inputField" layoutX="6.0" layoutY="318.0" prefHeight="25.0" prefWidth="459.0" />
+      <TextField fx:id="inputField" onAction="#onEnter" layoutX="6.0" layoutY="318.0" prefHeight="25.0" prefWidth="459.0" />
       <Button layoutX="474.0" layoutY="318.0" mnemonicParsing="false" onAction="#sendPressed" prefHeight="25.0" prefWidth="121.0" text="Send" />
    </children>
 </AnchorPane>

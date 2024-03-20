@@ -12,21 +12,30 @@ public class UserList
     users = new ArrayList<>();
     checker=new PasswordChecker();
   }
-  public int getSize()
+  public String getSize()
   {
-    return users.size();
+    return "Number of chatters: " + users.size();
   }
 
   public void addUser(String username, String password) throws IllegalArgumentException
   {
       checker.check(password);
-      users.add(username);
+      if(users.contains(username))
+        throw new IllegalArgumentException("This username is taken");
+      else if (username.length()<3)
+        throw new IllegalArgumentException("The username cannot be empty");
+      else
+        users.add(username);
+  }
+  public String getLast()
+  {
+    return "Last joined: " + users.get(users.size()-1);
   }
 
   @Override public String toString() {
-    String userList="Users: \n";
+    String userList="Users:";
     for(int i=0; i< users.size(); i++)
-      userList=userList+users.get(i)+'\n';
+      userList=userList+'\n'+users.get(i);
     return userList;
   }
 }

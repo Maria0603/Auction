@@ -16,6 +16,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
     this.userList = new UserList();
     conversation = new Conversation();
     property=new PropertyChangeSupport(this);
+    System.out.println(Logger.getInstance().getOutput());
   }
   @Override public void send(String username, String message)
   {
@@ -24,7 +25,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
     if(!message.startsWith("/"))
     {
       creator=new MessagePackageCreator();
-      sendMessage=creator.createPackage(username, message, "");
+      sendMessage=creator.createPackage(username, message, null);
     }
     else
     {
@@ -32,9 +33,12 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
       sendCommand=creator.createPackage(username, message, userList);
     }
     if(sendMessage!=null)
+    {
       conversation.addPackage(sendMessage);
+      Logger.getInstance().addLog(sendMessage.toString());
+    }
     else conversation.addPackage(sendCommand);
-    System.out.println(sendMessage + "   " + sendCommand);
+    //System.out.println(sendMessage + "   " + sendCommand);
   }
 
   @Override public String getWholeConversation()

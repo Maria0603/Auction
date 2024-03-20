@@ -1,5 +1,11 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
+
 public class CommandPackage extends Package
 {
   private String command, reply;
@@ -7,17 +13,15 @@ public class CommandPackage extends Package
   {
     super(sender);
     this.command = command;
-
-    if (reply != null && !reply.isEmpty()) {
-      this.reply = "Error: " + reply;
-    } else {
-      this.reply = reply;
-    }
+    this.reply = reply;
   }
 
   @Override public String toString()
   {
-     return "Command from " + getSender() + ": " + command + "\nReply: " + reply;
+    Date date = Calendar.getInstance().getTime();
+    SimpleDateFormat sdf = new SimpleDateFormat(
+        "dd/MM/yyyy HH:mm");
+    return sdf.format(date)+  " " + getSender() + ": " + command + "\n" + reply;
   }
 
   public String getCommand()

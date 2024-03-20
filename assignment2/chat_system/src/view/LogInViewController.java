@@ -3,6 +3,8 @@ package view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import viewmodel.LogInViewModel;
 
@@ -44,5 +46,20 @@ public class LogInViewController {
         logInViewModel.createUser();
         if(errorLabel.getText().isEmpty())
             viewHandler.openView("chat");
+    }
+    @FXML void onEnter()
+    {
+        usernameField.setOnKeyPressed(event -> {
+            if(event.getCode().equals(KeyCode.ENTER))
+            {
+                passwordField.requestFocus();
+            }
+        });
+        passwordField.setOnKeyPressed(event -> {
+            if(event.getCode().equals(KeyCode.ENTER))
+            {
+                logInPressed();
+            }
+        });
     }
 }

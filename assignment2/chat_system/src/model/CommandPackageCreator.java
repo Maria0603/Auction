@@ -1,11 +1,9 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class CommandPackageCreator extends PackageCreator {
 
-  private static final String[] COMMANDS = {"/list", "/number", "/date", "/time"};
+  private static final String[] COMMANDS = {"/list", "/number", "/last"};
   @Override
   protected Package createPackage(String sender, String command, Object reply)
   {
@@ -20,19 +18,15 @@ public class CommandPackageCreator extends PackageCreator {
         }
         case "/number" ->
         {
-          return new CommandPackage(sender, command, users.getSize() + "");
+          return new CommandPackage(sender, command, users.getSize());
         }
-        case "/date" ->
+        case "/last" ->
         {
-          return new CommandPackage(sender, command, LocalDate.now().toString());
-        }
-        case "/time" ->
-        {
-          return new CommandPackage(sender, command, LocalTime.now().toString());
+          return new CommandPackage(sender, command, users.getLast());
         }
         default ->
         {
-          return new CommandPackage(sender, command, "Invalid command");
+          throw new IllegalArgumentException("Invalid command");
         }
       }
     }
