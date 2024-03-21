@@ -20,25 +20,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   }
   @Override public void send(String username, String message)
   {
-    PackageCreator creator;
-    Package sendMessage=null, sendCommand=null;
-    if(!message.startsWith("/"))
-    {
-      creator=new MessagePackageCreator();
-      sendMessage=creator.createPackage(username, message, null);
-    }
-    else
-    {
-      creator=new CommandPackageCreator();
-      sendCommand=creator.createPackage(username, message, userList);
-    }
-    if(sendMessage!=null)
-    {
-      conversation.addPackage(sendMessage);
-      Logger.getInstance().addLog(sendMessage.toString());
-    }
-    else conversation.addPackage(sendCommand);
-    //System.out.println(sendMessage + "   " + sendCommand);
+    conversation.addPackage(username, message);
   }
 
   @Override public String getWholeConversation()

@@ -8,13 +8,12 @@ import java.util.Date;
 
 public class MessagePackage extends Package
 {
-  private String textContent, reply;
+  private String textContent;
 
-  public MessagePackage(String sender, String textContent, String reply)
+  public MessagePackage(String sender, String textContent)
   {
     super(sender);
     this.textContent = textContent;
-    this.reply = reply;
   }
 
   @Override public String toString()
@@ -22,9 +21,7 @@ public class MessagePackage extends Package
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat(
         "dd/MM/yyyy HH:mm");
-    if(reply==null)
       return sdf.format(date)+ " " + getSender() + ": " + textContent;
-    else throw new IllegalArgumentException(reply);
   }
 
   public String getTextContent()

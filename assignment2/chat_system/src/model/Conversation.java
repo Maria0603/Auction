@@ -12,13 +12,19 @@ public class Conversation {
     packages = new ArrayList<>();
   }
 
-  public void addPackage(Package pack) {
-    packages.add(pack);
-    conversationContent += pack.toString()+'\n';
+  public void addPackage(String sender, String request) {
+    PackageFactory factory = PackageFactorySelector.getFactory(request, this);
+    Package newPackage = factory.createPackage(sender, request);
+    packages.add(newPackage);
+    conversationContent += newPackage.toString()+'\n';
   }
 
 
   public String getConversationContent() {
     return conversationContent;
+  }
+
+  public int getNumberOdMessages(){
+    return packages.size();
   }
 }
