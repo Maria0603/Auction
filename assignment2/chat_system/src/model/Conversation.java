@@ -8,13 +8,15 @@ public class Conversation {
   private List<Package> packages;
 
   public Conversation() {
+    conversationContent="";
     packages = new ArrayList<>();
   }
 
   public void addPackage(Package pack) {
     packages.add(pack);
-    conversationContent += "\n" + pack.toString();
+    conversationContent += pack.toString()+'\n';
   }
+
 
   public String getConversationContent() {
     return conversationContent;

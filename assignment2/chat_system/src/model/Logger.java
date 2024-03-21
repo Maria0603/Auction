@@ -1,7 +1,10 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +34,50 @@ public class Logger {
     }
     return instance;
   }
-
+  public void addLog(String text)
+  {
+    output+=text+'\n';
+    addToFile(text +'\n');
+    //System.out.println(text);
+  }
+  public String getOutput()
+  {
+    return output;
+  }
+  public String getSortableDate()
+  {
+    DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    return LocalDateTime.now().format(dtf);
+  }
+  private void addToFile(String line)
+  {
+    if (line == null)
+    {
+      return;
+    }
+    BufferedWriter out = null;
+    try
+    {
+      String filename= getSortableDate()+".txt";
+      out = new BufferedWriter(new FileWriter(filename, true));
+      out.write(line + "\n");
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      try
+      {
+        out.close();
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    }
+  }
   public void extractLastMessageAndReply(String conversation) {
     //splitting conversation string into messages with newline character as the delimiter
     String[] messages = conversation.split("\\r?\\n");
@@ -55,7 +101,7 @@ public class Logger {
     System.out.println("Last Reply: " + lastReply);
   }
 
-  public String extractOnlyMessages(String conversation){
+  public String extractOnlyMessages(String conversation){//add date and time for each message
     // Split the conversation string into messages with newline character as the delimiter
     String[] lines = conversation.split("\\r?\\n");
     List<String> messages = new ArrayList<>();

@@ -3,7 +3,7 @@ package model;
 public abstract class PackageCreator {
 
   private Package aPackage;
-  protected abstract void createPackage(String sender, String request, String reply);
+  protected abstract Package createPackage(String sender, String request, Object reply);
   public  Package getPackage()
   {
     return aPackage;

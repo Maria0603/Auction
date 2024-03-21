@@ -1,22 +1,35 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class CommandPackageCreator extends PackageCreator {
 
-  private static final String[] COMMANDS = {"/list", "/number", "/date", "/time"};
+  private static final String[] COMMANDS = {"/list", "/number", "/last"};
   @Override
-  protected void createPackage(String sender, String command, String reply) {
-    switch (command)
+  protected Package createPackage(String sender, String command, Object reply)
+  {
+    if (reply.getClass().equals(UserList.class))
     {
-      case "/list" -> new CommandPackage(sender, command, "list of chatters");
-      case "/number" ->
-          new CommandPackage(sender, command, "number of chatters");
-      case "/date" ->
-          new CommandPackage(sender, command, LocalDate.now().toString());
-      case "/time" ->
-          new CommandPackage(sender, command, LocalTime.now().toString());
+      UserList users = (UserList) reply;
+      switch (command)
+      {
+        case "/list" ->
+        {
+          return new CommandPackage(sender, command, users.toString());
+        }
+        case "/number" ->
+        {
+          return new CommandPackage(sender, command, users.getSize());
+        }
+        case "/last" ->
+        {
+          return new CommandPackage(sender, command, users.getLast());
+        }
+        default ->
+        {
+          throw new IllegalArgumentException("Invalid command");
+        }
+      }
     }
+    return null;
   }
 }
