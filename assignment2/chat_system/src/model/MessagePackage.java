@@ -21,7 +21,7 @@ public class MessagePackage extends Package
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat(
         "dd/MM/yyyy HH:mm");
-      return sdf.format(date)+ " " + getSender() + ": " + textContent;
+      return sdf.format(date)+ " " + getSender() + ": " + '\n' + textContent;
   }
 
   public String getTextContent()

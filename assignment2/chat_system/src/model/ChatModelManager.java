@@ -20,7 +20,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   }
   @Override public void send(String username, String message)
   {
-    conversation.addPackage(username, message);
+    conversation.addPackage(username, message, userList);
   }
 
   @Override public String getWholeConversation()

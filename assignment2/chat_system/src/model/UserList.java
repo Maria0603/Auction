@@ -23,7 +23,9 @@ public class UserList
       if(users.contains(username))
         throw new IllegalArgumentException("This username is taken");
       else if (username.length()<3)
-        throw new IllegalArgumentException("The username cannot be empty");
+        throw new IllegalArgumentException("The username is too short");
+      else if(username.length()>25)
+        throw new IllegalArgumentException("The username is too long");
       else
         users.add(username);
   }

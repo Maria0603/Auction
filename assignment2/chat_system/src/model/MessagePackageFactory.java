@@ -6,13 +6,15 @@ public class MessagePackageFactory extends PackageFactory {
     super(conversation);
   }
 
-  @Override protected Package createPackage(String sender, String request) {
-
+  @Override protected Package createPackage(String sender, String request, UserList list)
+  {
     if (request.isEmpty()) {
       throw new IllegalArgumentException("No input");
     }
     else {
-      return new MessagePackage(sender, request);
+      MessagePackage pack=new MessagePackage(sender, request);
+      Logger.getInstance().addLog(pack.toString());
+      return pack;
     }
 
   }

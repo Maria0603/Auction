@@ -21,7 +21,7 @@ public class CommandPackage extends Package
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat(
         "dd/MM/yyyy HH:mm");
-    return sdf.format(date)+  " " + getSender() + ": " + command + "\n" + reply;
+    return sdf.format(date)+  " " + getSender() + ": " + '\n' + command + '\n' + reply;
   }
 
   public String getCommand()

@@ -6,30 +6,28 @@ import java.util.Date;
 
 public class CommandPackageFactory extends PackageFactory {
 
-  private static final String[] COMMANDS = {"/list", "/number", "/time"};
+  private static final String[] COMMANDS = {"/list", "/number", "/last"};
 
 
   public CommandPackageFactory(Conversation conversation){
     super(conversation);
   }
   @Override
-  protected Package createPackage(String sender, String command)
+  protected Package createPackage(String sender, String command, UserList list)
   {
       switch (command)
       {
-        case "/characters" ->
+        case "/list" ->
         {
-          return new CommandPackage(sender, command, "Number of characters: " + conversation.getConversationContent().length());
+          return new CommandPackage(sender, command, list.toString());
         }
-        case "/messages" ->
+        case "/number" ->
         {
-          return new CommandPackage(sender, command, "Number of messages: " + conversation.getNumberOdMessages());
+          return new CommandPackage(sender, command, list.getSize());
         }
-        case "/date" ->
+        case "/last" ->
         {
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-          LocalDateTime now = LocalDateTime.now();
-          return new CommandPackage(sender, command, "Date and time now: " + dtf.format(now));
+          return new CommandPackage(sender, command, list.getLast());
         }
         default ->
         {

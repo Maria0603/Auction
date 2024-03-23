@@ -6,7 +6,10 @@ public abstract class PackageFactory {
   public PackageFactory(Conversation conversation){
     this.conversation = conversation;
   }
-
-  protected abstract Package createPackage(String sender, String request);
+  public Package getPackage(String sender, String request, UserList list)
+  {
+    return createPackage(sender, request, list);
+  }
+  protected abstract Package createPackage(String sender, String request, UserList list);
 
 }

@@ -46,7 +46,8 @@ public class ChatViewController
   {
     chatViewModel.send();
     inputField.requestFocus();
-    chatList.scrollTopProperty().set(chatList.getHeight()*20000);
+    if(chatList.getText()!=null && !chatList.getText().isEmpty())
+      chatList.positionCaret(chatList.getText().length());
   }
   @FXML public void onEnter()
   {

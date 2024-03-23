@@ -12,9 +12,9 @@ public class Conversation {
     packages = new ArrayList<>();
   }
 
-  public void addPackage(String sender, String request) {
+  public void addPackage(String sender, String request, UserList list) {
     PackageFactory factory = PackageFactorySelector.getFactory(request, this);
-    Package newPackage = factory.createPackage(sender, request);
+    Package newPackage = factory.getPackage(sender, request, list);
     packages.add(newPackage);
     conversationContent += newPackage.toString()+'\n';
   }

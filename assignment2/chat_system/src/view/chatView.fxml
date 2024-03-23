@@ -16,7 +16,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextArea fx:id="chatList" editable="false" layoutY="52.0" prefHeight="258.0" prefWidth="600.0">
+      <TextArea fx:id="chatList" wrapText="true" editable="false" layoutY="52.0" prefHeight="258.0" prefWidth="600.0">
          <font>
             <Font size="16.0" />
          </font></TextArea>
