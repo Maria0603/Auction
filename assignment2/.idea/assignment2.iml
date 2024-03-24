@@ -12,5 +12,6 @@
     <orderEntry type="library" name="gson-2.8.5" level="application" />
     <orderEntry type="library" name="javafx-swt" level="application" />
     <orderEntry type="library" name="MyObserver-1.4" level="application" />
+    <orderEntry type="library" name="important_javafx-swt" level="application" />
   </component>
 </module>

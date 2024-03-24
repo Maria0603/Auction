@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73f27bf3-9147-419b-b7e4-be17b595aa0d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat_system/src/Main2.java" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/src/Main2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/mediator/ChatClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/mediator/ChatClientReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/mediator/ServerModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/model/ChatModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/model/ChatModelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/observer/PropertyChangeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/observer/UnnamedPropertyChangeSubject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/view/ChatViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/view/LogInViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/view/ViewHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/viewmodel/ChatViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/viewmodel/LogInViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/viewmodel/ViewModelFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chat_system/client/src/viewmodel/ViewModelState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_system/client/src/view/chatView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/client/src/view/chatView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_system/client/src/view/logInView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/chat_system/client/src/view/logInView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +55,24 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "connect__windows__masha",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/martm/IdeaProjects/SecondSemesterStuff",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "C:/Users/martm/Documents/GitHub/Auction/assignment2/chat_system/client/src/mediator",
+    "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\martm\Documents\GitHub\Auction\assignment2\chat_system\client\src\mediator" />
+      <recent name="C:\Users\martm\Documents\GitHub\Auction\assignment2\chat_system\client\src" />
+      <recent name="C:\Users\martm\Documents\GitHub\Auction\assignment2\chat_system\client\src\view" />
+      <recent name="C:\Users\martm\Documents\GitHub\Auction\assignment2\chat_system" />
+      <recent name="C:\Users\martm\Documents\GitHub\Auction\assignment2\chat_system\client" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="mediator" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
