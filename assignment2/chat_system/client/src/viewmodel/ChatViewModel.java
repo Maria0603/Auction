@@ -17,17 +17,18 @@ public class ChatViewModel implements PropertyChangeListener
   //initializations
   public ChatViewModel(ChatModel model, ViewModelState state)
   {
-    this.model=model;
-    viewModelState=state;
-    headerProperty=new SimpleStringProperty();
-    inputProperty=new SimpleStringProperty();
-    errorProperty=new SimpleStringProperty();
-    listProperty=new SimpleStringProperty();
+    this.model = model;
+    viewModelState = state;
+    headerProperty = new SimpleStringProperty();
+    inputProperty = new SimpleStringProperty();
+    errorProperty = new SimpleStringProperty();
+    listProperty = new SimpleStringProperty();
     model.addListener("Message", this);
     //  Should add a listener to model for "broadcast"... see propertyChange() method bellow
   }
 
-  public void setHeaderProperty(String headerProperty) {
+  public void setHeaderProperty(String headerProperty)
+  {
     this.headerProperty.set(headerProperty);
   }
 
@@ -62,9 +63,10 @@ public class ChatViewModel implements PropertyChangeListener
     try
     {
       //send the user and their message, to update the conversation
-      if(inputProperty.get()==null)
+      if (inputProperty.get() == null)
         model.send(headerProperty.get(), "");
-      else model.send(headerProperty.get(), inputProperty.get().trim());
+      else
+        model.send(headerProperty.get(), inputProperty.get().trim());
       //System.out.println(headerProperty.get() + " " + inputProperty.get());
       //clear the error label and the input field
       clear();
@@ -74,11 +76,12 @@ public class ChatViewModel implements PropertyChangeListener
       //listProperty.set(Logger.getInstance().extractOnlyMessages(updatedConversation));
       listProperty.set(updatedConversation);
     }
-    catch(Exception e)
+    catch (Exception e)
     {
       errorProperty.set(e.getMessage());
     }
   }
+
   public void clear()
   {
     listProperty.set(null);
@@ -86,17 +89,19 @@ public class ChatViewModel implements PropertyChangeListener
     errorProperty.set(null);
   }
 
-
-  public void reset() {
+  public void reset()
+  {
     headerProperty.set(viewModelState.getUsername());
   }
 
-  @Override public void propertyChange(PropertyChangeEvent evt)
-  {
-    //  For list change in actual window...
-    //  there might be a need for this class to listen to model for any change
-    Platform.runLater(() -> {
+  @Override public void propertyChange(PropertyChangeEvent evt) {
+    if ("broadcast".equals(evt.getPropertyName())) {
 
-    });
+      // Update the conversation when a broadcast message is received
+      Platform.runLater(() -> {
+        String updatedConversation = model.getWholeConversation();
+        listProperty.set(updatedConversation);
+      });
+    }
   }
 }

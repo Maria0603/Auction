@@ -1,6 +1,8 @@
 package mediator;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import model.Package;
 import utility.observer.javaobserver.NamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
@@ -11,86 +13,198 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ChatClient implements ServerModel, NamedPropertyChangeSubject {
+public class ChatClient implements ServerModel, NamedPropertyChangeSubject
+{
 
+  private String HOST;
+  private int PORT;
 
-    private String HOST;
-    private int PORT;
+  private BufferedReader in;
+  private PrintWriter out;
+  private Gson gson;
 
-    private BufferedReader in;
-    private PrintWriter out;
-    private Gson gson;
+  String receivedText;
+  private PropertyChangeSupport property;
 
-    String receivedText;
-    private PropertyChangeSupport property;
+  public ChatClient(String HOST, int PORT)
+  {
+    this.HOST = HOST;
+    this.PORT = PORT;
+    this.property = new PropertyChangeSupport(this);
+  }
 
+  public ChatClient()
+  {
+    this("localhost", 1234);
+  }   //  Default constructor
 
-    public ChatClient(String HOST, int PORT){
-        this.HOST = HOST;
-        this.PORT = PORT;
-        this.property = new PropertyChangeSupport(this);
+  //  TODO: send(+), getWholeConversation(+), createUser(String username, String password)
+  //        and logic behind broadcast +
+  @Override public void send(String username, String message)
+  {
+    try {
+      JsonObject messageObject = new JsonObject();
+      messageObject.addProperty("username", username);
+      messageObject.addProperty("message", message);
+      out.println(messageObject.toString());
+
+      out.flush(); // Flush the output stream to ensure immediate sending
+    } catch (Exception e) {
+      handleClientError("Error sending message: " + e.getMessage());
     }
-    public ChatClient(){
-        this("localhost",1234);
-    }   //  Default constructor
+  }
+
+  public void receive(String c)
+  {
+    //  Might want to fire broadcast here for model to listen to
+    property.firePropertyChange("broadcast", null, c);
+
+  }
+
+  @Override public String getWholeConversation()
+  {
+
+    StringBuilder conversationBuilder = new StringBuilder();
+
+    try
+    {
+      out.println("GET_CONVERSATION");
+      String line;
+      while ((line = in.readLine()) != null)
+      {
+        conversationBuilder.append(line).append("\n");
+      }
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+    return conversationBuilder.toString();
+  }
+
+  @Override public void createUser(String username, String password)
+      throws IllegalArgumentException
+  {
+    try {
+    // Construct the JSON request for creating a user
+    JsonObject createUserRequest = new JsonObject();
+
+    createUserRequest.addProperty("operation", "createUser");
+    createUserRequest.addProperty("username", username);
+    createUserRequest.addProperty("password", password);
+
+    out.println(createUserRequest.toString());
+    out.flush(); // immediate sending
 
 
-    //  TODO: send(), getWholeConversation(), createUser(String username, String password)
-    //        and logic behind broadcast
-    @Override
-    public void send(String username, String message) {
+    boolean success = waitingForReply(); //waiting
 
+    // If the user creation was successful, broadcast the event
+    if (success) {
+      property.firePropertyChange("UserCreated", null, username);
+    }
+  } catch (Exception e) {
+    handleClientError("Error creating user: " + e.getMessage());
+  }
+  }
+
+  @Override public void connect()
+  {
+    try
+    {
+      Socket socket = new Socket(HOST, PORT);
+      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      out = new PrintWriter(socket.getOutputStream(), true);
+      gson = new Gson();
+
+      //  Starting the receiver thread here
+      ChatClientReceiver receiver = new ChatClientReceiver(this, in);
+      Thread thread = new Thread(receiver);
+      thread.setDaemon(true);
+      thread.start();
 
     }
-
-    public void receive(String c){
-        //  Might want to fire broadcast here for model to listen to
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
     }
-    @Override
-    public String getWholeConversation() {
+  }
 
-        return null;
+  @Override public void disconnect()
+  {
+    try
+    {
+      in.close();
+      out.close();
     }
-
-    @Override
-    public void createUser(String username, String password) throws IllegalArgumentException {
-
+    catch (IOException e)
+    {
+      throw new RuntimeException(e);
     }
-    @Override
-    public void connect() {
-        try {
-            Socket socket = new Socket(HOST, PORT);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-            gson = new Gson();
+  }
 
-            //  Starting the receiver thread here
-            ChatClientReceiver receiver = new ChatClientReceiver(this,in);
-            Thread thread = new Thread(receiver);
-            thread.setDaemon(true);
-            thread.start();
+  public void handleClientError(String errorMessage)
+  {
+    System.err.println("Error: " + errorMessage);
+  }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+  @Override public void addListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    property.addPropertyChangeListener(propertyName, listener);
+  }
+
+  @Override public void removeListener(String propertyName,
+      PropertyChangeListener listener)
+  {
+    property.removePropertyChangeListener(propertyName, listener);
+  }
+
+  // waiting for server reply
+  private boolean waitingForReply()
+  {
+    try
+    {
+      long startTime = System.currentTimeMillis();
+      long timeout = 5000;
+      while (!in.ready())
+      {
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        if (elapsedTime >= timeout)
+        {
+          handleClientError(
+              "Timeout: Server did not respond within the specified time.");
+          return false; // if fail
         }
-    }
+        Thread.sleep(100);
+      }
 
-    @Override
-    public void disconnect() {
-        try {
-            in.close();
-            out.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+      // If ready - read the server response
+      String response = in.readLine();
+      if (response != null)
+      {
+        // Parse the response as JSON
+        JsonObject jsonResponse = gson.fromJson(response, JsonObject.class);
+        // success?
+        boolean success = jsonResponse.get("success").getAsBoolean();
+        if (!success)
+        {
+          // !success = Error
+          String errorMessage = jsonResponse.get("errorMessage").getAsString();
+          handleClientError(errorMessage);
         }
+        return success;
+      }
+      else
+      {
+        handleClientError("Error: Server response was null.");
+        return false;
+      }
     }
-    @Override
-    public void addListener(String propertyName, PropertyChangeListener listener) {
-        property.addPropertyChangeListener(propertyName,listener);
+    catch (IOException | InterruptedException e)
+    {
+      handleClientError("Error occurred while waiting for server reply: " + e.getMessage());
+      return false;
     }
-
-    @Override
-    public void removeListener(String propertyName, PropertyChangeListener listener) {
-        property.removePropertyChangeListener(propertyName,listener);
-    }
+  }
 }

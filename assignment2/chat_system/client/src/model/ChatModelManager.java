@@ -50,4 +50,11 @@ public class ChatModelManager implements ChatModel, PropertyChangeListener
     property.addPropertyChangeListener(propertyName, listener);
   }
 
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    String propertyName = evt.getPropertyName();
+    if ("broadcast".equals(propertyName)) {
+      property.firePropertyChange("broadcast", evt.getOldValue(), evt.getNewValue());
+    }
+  }
 }

@@ -5,23 +5,35 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class ChatClientReceiver implements Runnable{
+public class ChatClientReceiver implements Runnable
+{
 
-    private ChatClient client;
-    private BufferedReader in;
-    private Gson gson;
+  private ChatClient client;
+  private BufferedReader in;
+  private Gson gson;
 
-    public ChatClientReceiver(ChatClient client, BufferedReader in){
-        this.client = client;
-        this.in = in;
-        this.gson = new Gson();
+  public ChatClientReceiver(ChatClient client, BufferedReader in)
+  {
+    this.client = client;
+    this.in = in;
+    this.gson = new Gson();
+  }
+
+  //  For receiving stuff
+  @Override public void run()
+  {
+    try
+    {
+      String receivedMessage;
+      while ((receivedMessage = in.readLine()) != null)
+      {
+        client.receive(receivedMessage);
+      }
     }
-
-    //  For receiving stuff
-    @Override
-    public void run() {
-        while (true){
-            //client.receive();
-        }
+    catch (IOException e)
+    {
+      e.printStackTrace();
     }
+  }
 }
+
