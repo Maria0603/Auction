@@ -21,7 +21,7 @@ public class CommandPackage extends Package
         "dd/MM/yyyy HH:mm");
     return sdf.format(date)+  " " + getSender() + ": " + '\n' + textContent + '\n' + reply;
   }
-  
+
 
   public String getCommand() {
     return textContent;
