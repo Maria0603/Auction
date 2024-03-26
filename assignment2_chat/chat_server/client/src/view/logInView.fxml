@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInViewController">
+   <children>
+      <Label alignment="CENTER" layoutY="101.0" prefHeight="31.0" prefWidth="600.0" text="Create User ">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="220.0" layoutY="161.0" onAction="#onEnter" prefHeight="26.0" prefWidth="294.0" />
+      <Label alignment="CENTER" layoutX="71.0" layoutY="162.0" prefHeight="25.0" prefWidth="140.0" text="Username">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="226.0" layoutY="241.0" mnemonicParsing="false" onAction="#logInPressed" prefHeight="54.0" prefWidth="149.0" text="Create User" />
+      <Label fx:id="errorLabel" alignment="CENTER" layoutY="339.0" prefHeight="46.0" prefWidth="600.0" text="error" textFill="RED" />
+      <TextField fx:id="passwordField" layoutX="220.0" layoutY="197.0" onAction="#onEnter" prefHeight="26.0" prefWidth="294.0" />
+      <Label alignment="CENTER" layoutX="71.0" layoutY="198.0" prefHeight="25.0" prefWidth="140.0" text="Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
