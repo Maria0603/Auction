@@ -20,7 +20,27 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   }
   @Override public Package send(String username, String message)
   {
-    return conversation.addPackage(username, message, userList);
+    Package newPackage;
+    if(message.startsWith("/")){
+      newPackage = conversation.addCommand(username, message, userList);
+      property.firePropertyChange("Command", getWholeConversation(), newPackage);
+    }else {
+      newPackage = conversation.addMessage(username, message, userList);
+      property.firePropertyChange("Message", getWholeConversation(), newPackage);
+    }
+    return newPackage;
+  }
+
+  @Override public MessagePackage sendMessage(String username, String message) {
+    Package newPackage = conversation.addMessage(username, message, userList);
+    property.firePropertyChange("Message", getWholeConversation(), newPackage);
+    return (MessagePackage) newPackage;
+  }
+
+  @Override public CommandPackage sendCommand(String username, String message) throws IllegalArgumentException {
+    Package newPackage = conversation.addCommand(username, message, userList);
+    property.firePropertyChange("Command", getWholeConversation(), newPackage);
+    return (CommandPackage) newPackage;
   }
 
   @Override public String getWholeConversation()
@@ -28,10 +48,16 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
     return conversation.getConversationContent();
   }
 
-  @Override public void createUser(String username, String password) throws IllegalArgumentException
+  @Override public boolean createUser(String username, String password)
   {
-    userList.addUser(username, password);
-    System.out.println(userList.toString());
+    try {
+      userList.addUser(username, password);
+      System.out.println(userList.toString());
+      return true;
+    }catch (Exception e){
+      e.printStackTrace();
+      return false;
+    }
   }
 
   @Override public void setConversation(Conversation conversation)

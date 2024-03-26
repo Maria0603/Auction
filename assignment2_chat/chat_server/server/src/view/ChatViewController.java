@@ -24,14 +24,14 @@ public class ChatViewController
     this.root = root;
     this.viewHandler = viewHandler;
     this.chatViewModel=chatViewModel;
-    headerLabel.textProperty().bindBidirectional(chatViewModel.getHeaderProperty());
+    //headerLabel.textProperty().bindBidirectional(chatViewModel.getHeaderProperty());
     //chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
 
     chatViewModel.getListProperty().addListener((obs,oldV,newV)->chatList.setText(newV.toString()+"\n"+chatList.getText()));
 
-    reset();
+    //reset();
   }
   public void reset()
   {

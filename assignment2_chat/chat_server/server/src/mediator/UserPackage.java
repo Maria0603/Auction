@@ -1,11 +1,21 @@
 package mediator;
 
-public class Sendable {
-  String message, sender;
+public class UserPackage {
+  String type, message, sender;
 
-  public Sendable(String message, String sender) {
+  // UserPackage is created for User requests, can also be used as logIn request
+  //sender = sender, and message = password
+  //or
+  public UserPackage(String type, String sender, String message) {
+    this.type = type;
     this.message = message;
     this.sender = sender;
+  }
+
+  public UserPackage(String type, String errorMessage){
+    this.type = type;
+    this.message = errorMessage;
+    this.sender = null;
   }
 
   public String getMessage() {
@@ -22,6 +32,10 @@ public class Sendable {
 
   public void setSender(String sender) {
     this.sender = sender;
+  }
+
+  public String getType() {
+    return type;
   }
 
   @Override public String toString() {

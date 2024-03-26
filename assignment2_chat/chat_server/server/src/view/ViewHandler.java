@@ -24,7 +24,7 @@ public class ViewHandler
   public void start(Stage primaryStage)
   {
     this.primaryStage = primaryStage;
-    openView("login");
+    openView("chat");
   }
 
   public void openView(String id)

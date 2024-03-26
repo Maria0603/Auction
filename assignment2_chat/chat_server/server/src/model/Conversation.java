@@ -12,12 +12,29 @@ public class Conversation {
     packages = new ArrayList<>();
   }
 
-  public Package addPackage(String sender, String request, UserList list) {
-    PackageFactory factory = PackageFactorySelector.getFactory(request, this);
-    Package newPackage = factory.getPackage(sender, request, list);
-    packages.add(newPackage);
-    conversationContent += newPackage.toString()+'\n';
-    return newPackage;
+  public Package addCommand(String sender, String request, UserList list) {
+    PackageFactory factory;
+    if (request.startsWith("/")){
+      factory = new CommandPackageFactory(this);
+      Package newPackage = factory.getPackage(sender, request, list);
+      packages.add(newPackage);
+      conversationContent += newPackage.toString()+'\n';
+      return newPackage;
+    } else {
+      throw new IllegalArgumentException("Command should start with '/'");
+    }
+  }
+
+  public Package addMessage(String sender, String request, UserList list){
+    if (request.startsWith("/")){
+      throw new IllegalArgumentException("Message cannot start with '/'");
+    } else {
+      MessagePackageFactory messagePackageFactory = new MessagePackageFactory(this);
+      Package newPackage = messagePackageFactory.getPackage(sender, request, list);
+      packages.add(newPackage);
+      conversationContent += newPackage.toString()+'\n';
+      return newPackage;
+    }
   }
 
 

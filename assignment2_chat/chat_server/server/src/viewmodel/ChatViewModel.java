@@ -24,6 +24,7 @@ public class ChatViewModel implements PropertyChangeListener
     errorProperty = new SimpleStringProperty();
     listProperty = new SimpleStringProperty();
     model.addListener("Message", this);
+    model.addListener("Command", this);
     //  Should add a listener to model for "broadcast"... see propertyChange() method bellow
   }
 
@@ -95,13 +96,12 @@ public class ChatViewModel implements PropertyChangeListener
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt) {
-    if ("broadcast".equals(evt.getPropertyName())) {
 
-      // Update the conversation when a broadcast message is received
+      // Update the conversation if any kind of message received
       Platform.runLater(() -> {
-        String updatedConversation = model.getWholeConversation();
+        String updatedConversation = (String) evt.getOldValue();
         listProperty.set(updatedConversation);
       });
-    }
+
   }
 }

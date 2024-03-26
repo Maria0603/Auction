@@ -26,4 +26,9 @@ public class CommandPackage extends Package
   public String getCommand() {
     return textContent;
   }
+
+  public String getReply(){
+    return reply;
+  }
+
 }
