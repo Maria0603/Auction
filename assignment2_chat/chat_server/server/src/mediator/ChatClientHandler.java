@@ -1,11 +1,7 @@
 package mediator;
 
 import com.google.gson.Gson;
-import model.ChatModel;
-import model.CommandPackage;
-import model.MessagePackage;
-import model.Package;
-import model.PackageFactorySelector;
+import model.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -14,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Map;
 
 public class ChatClientHandler implements Runnable, PropertyChangeListener
 {
@@ -43,26 +40,56 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
     {
       e.printStackTrace();
     }
-
+  while(running)
+  {
     try
     {
-      String request=in.readLine();
-      System.out.println("Received: " + request);
-      try
+      String request = in.readLine();
+      System.out.println("Received in client handler: " + request);
+
+      if (gson.fromJson(request, Map.class).get("type").equals("Create"))
       {
-        CommandPackage receivedPackage=gson.fromJson(request, CommandPackage.class);
-        CommandPackage sendPackage=(CommandPackage)model.send(receivedPackage.getSender(), receivedPackage.getCommand());
-        String toJson=gson.toJson(sendPackage);
+        UserPackage receivedPackage = gson.fromJson(request, UserPackage.class);
+        UserPackage sendPackage;
+        try
+        {
+          model.createUser(receivedPackage.getUsername(), receivedPackage.getPassword());
+          sendPackage = new UserPackage(receivedPackage.getType(),
+              receivedPackage.getUsername(), receivedPackage.getPassword());
+        }
+        catch (IllegalArgumentException ex)
+        {
+          sendPackage = new UserPackage("UserError", ex.getMessage());
+        }
+        String toJson = gson.toJson(sendPackage);
         out.println(toJson);
         System.out.println("Sent: " + toJson);
       }
-      catch(IllegalStateException e)
+      else
       {
-        MessagePackage receivedPackage=gson.fromJson(request, MessagePackage.class);
-        MessagePackage sendPackage=(MessagePackage) model.send(receivedPackage.getSender(), receivedPackage.getTextContent());
-        String toJson=gson.toJson(sendPackage);
-        out.println(toJson);
-        System.out.println("Sent: " + toJson);
+        CommunicationPackageFactory factory = new CommunicationPackageFactory(
+            model);
+        CommunicationPackage receivedPackageUnchecked = gson.fromJson(request,
+            CommunicationPackage.class);
+        System.out.println("Client handler run method: " + receivedPackageUnchecked.getType() +  " " + receivedPackageUnchecked.getSender() + " " + receivedPackageUnchecked.getRequest() + " " + receivedPackageUnchecked.getReply() + '\n');
+
+        CommunicationPackage sendPackage = (CommunicationPackage) factory.getPackage(
+            receivedPackageUnchecked.getType(), receivedPackageUnchecked.getSender(),
+            receivedPackageUnchecked.getRequest(), receivedPackageUnchecked.getReply());
+        String toJson = gson.toJson(sendPackage);
+
+
+        if(sendPackage.getType().equals("Message"))
+        {
+          model.send(sendPackage.getSender(), sendPackage.getRequest());
+          System.out.println("Sent through model: " + sendPackage);
+        }
+        else
+        {
+          out.println(toJson);
+          System.out.println("Sent: " + toJson);
+        }
+      }
       }
       catch (Exception e)
       {
@@ -70,18 +97,12 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
       }
     }
 
-
-    catch(Exception e)
-    {
-      e.printStackTrace();
-    }
-
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     System.out.println(evt.getPropertyName()  + " received in the ClientHandler");
-    MessagePackage broadcast=new MessagePackage(evt.getOldValue()+"", evt.getNewValue()+"");
+    CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), ((CommunicationPackage)evt.getNewValue()).getSender(), ((CommunicationPackage)evt.getNewValue()).getRequest(), ((CommunicationPackage)evt.getNewValue()).getReply());
     String toJson=gson.toJson(broadcast);
     out.println(toJson);
   }

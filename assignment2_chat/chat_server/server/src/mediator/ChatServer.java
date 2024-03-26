@@ -1,7 +1,6 @@
 package mediator;
 
 import model.ChatModel;
-import model.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -37,15 +36,17 @@ public class ChatServer implements Runnable
     {
       running=true;
       welcomeSocket=new ServerSocket(PORT);
-      Socket socket=welcomeSocket.accept();
-      ChatClientHandler clientHandler=new ChatClientHandler(socket, model);
-      Thread clientThread=new Thread(clientHandler);
-      clientThread.setDaemon(true);
-      clientThread.start();
+      while(running)
+      {
+        Socket socket = welcomeSocket.accept();
+        ChatClientHandler clientHandler = new ChatClientHandler(socket, model);
+        Thread clientThread = new Thread(clientHandler);
+        clientThread.setDaemon(true);
+        clientThread.start();
+      }
     }
     catch (IOException e)
     {
-      //Logger.getInstance().addLog("Error in ChatServer run method");
       System.out.println("Error in ChatServer run method");
     }
   }

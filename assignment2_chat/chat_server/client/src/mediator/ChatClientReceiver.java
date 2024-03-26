@@ -1,38 +1,47 @@
 package mediator;
 
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class ChatClientReceiver implements Runnable
 {
-
-  private ChatClient client;
   private BufferedReader in;
-  private Gson gson;
-
+  private boolean running;
+  private ChatClient client;
   public ChatClientReceiver(ChatClient client, BufferedReader in)
   {
-    this.client = client;
-    this.in = in;
-    this.gson = new Gson();
+    this.in=in;
+    this.client=client;
+    running=true;
   }
 
-  //  For receiving stuff
   @Override public void run()
+  {
+    running=true;
+    while(running)
+    {
+      try
+      {
+        String line = in.readLine();
+        System.out.println("Received in reader: " + line);
+        client.receive(line);
+      }
+      catch (IOException e)
+      {
+        //
+      }
+    }
+  }
+  public void close()
   {
     try
     {
-      String receivedMessage;
-      while ((receivedMessage = in.readLine()) != null)
-      {
-        client.receive(receivedMessage);
-      }
+      running = false;
+      in.close();
     }
     catch (IOException e)
     {
-      e.printStackTrace();
+      //
     }
   }
 }

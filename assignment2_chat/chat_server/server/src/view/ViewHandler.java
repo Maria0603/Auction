@@ -36,7 +36,7 @@ public class ViewHandler
         root = loadChatView("chatView.fxml");
         break;
       case "login":
-        root = loadlogInView("logInView.fxml");
+        root = loadLogInView("logInView.fxml");
         break;
     }
     currentScene.setRoot(root);
@@ -58,7 +58,7 @@ public class ViewHandler
     primaryStage.close();
   }
 
-  private Region loadlogInView(String fxmlFile)
+  private Region loadLogInView(String fxmlFile)
   {
     if (logInViewController == null)
     {
@@ -92,7 +92,6 @@ public class ViewHandler
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxmlFile));
         Region root = loader.load();
-
         chatViewController = loader.getController();
         chatViewController
             .init(this, viewModelFactory.getChatViewModel(), root);

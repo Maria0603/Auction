@@ -4,7 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73f27bf3-9147-419b-b7e4-be17b595aa0d" name="Changes" comment="" />
+    <list default="true" id="73f27bf3-9147-419b-b7e4-be17b595aa0d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/Main2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/MyApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/CommunicationPackage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/Package.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/UserPackage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/observer/PropertyChangeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/observer/UnnamedPropertyChangeSubject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/Main2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/CommunicationPackage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/CommunicationPackageFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/UserPackage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/UserPackageFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/observer/PropertyChangeListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/observer/UnnamedPropertyChangeSubject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/TestClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/mediator/ChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/mediator/ChatClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/mediator/ChatClientReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/mediator/ChatClientReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/ChatModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/ChatModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/model/ChatModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/ChatViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/ChatViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/LogInViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/LogInViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/ViewHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/chatView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/chatView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/logInView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/view/logInView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ChatViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ChatViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/LogInViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/LogInViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ViewModelState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/client/src/viewmodel/ViewModelState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/MyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/mediator/ChatClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/mediator/ChatClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/mediator/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/mediator/ChatServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/ChatModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/ChatModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/ChatModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/CommandPackage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/CommandPackageFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/Conversation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/MessagePackage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/MessagePackageFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/Package.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/PackageFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/PackageFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/PackageFactorySelector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/PasswordChecker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/UserList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/model/UserList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/ChatViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/ChatViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/LogInViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/LogInViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/ViewHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/chatView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/chatView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/logInView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/view/logInView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ChatViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ChatViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/LogInViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/LogInViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ViewModelState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../assignment2_chat/chat_server/server/src/viewmodel/ViewModelState.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,18 +88,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "client__server__comb",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/martm/IdeaProjects/SecondSemesterStuff",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;client__server__comb&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/martm/IdeaProjects/SecondSemesterStuff&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />

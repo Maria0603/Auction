@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.ChatModel;
+import model.CommunicationPackage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -17,18 +18,16 @@ public class ChatViewModel implements PropertyChangeListener
   //initializations
   public ChatViewModel(ChatModel model, ViewModelState state)
   {
-    this.model = model;
-    viewModelState = state;
-    headerProperty = new SimpleStringProperty();
-    inputProperty = new SimpleStringProperty();
-    errorProperty = new SimpleStringProperty();
-    listProperty = new SimpleStringProperty();
+    this.model=model;
+    viewModelState=state;
+    headerProperty=new SimpleStringProperty();
+    inputProperty=new SimpleStringProperty();
+    errorProperty=new SimpleStringProperty();
+    listProperty= new SimpleStringProperty();
     model.addListener("Message", this);
-    //  Should add a listener to model for "broadcast"... see propertyChange() method bellow
   }
 
-  public void setHeaderProperty(String headerProperty)
-  {
+  public void setHeaderProperty(String headerProperty) {
     this.headerProperty.set(headerProperty);
   }
 
@@ -55,33 +54,27 @@ public class ChatViewModel implements PropertyChangeListener
   //functionality for the Send button
   public void send()
   {
-    /*
-    dd/mm/yyyy hh:mm Username: message
-    dd/mm/yyyy hh"mm Username: command
-    Reply
-     */
+
     try
     {
       //send the user and their message, to update the conversation
-      if (inputProperty.get() == null)
-        model.send(headerProperty.get(), "");
-      else
-        model.send(headerProperty.get(), inputProperty.get().trim());
+      if(inputProperty.get()!=null && !inputProperty.get().trim().isEmpty())
+       model.send(headerProperty.get(), inputProperty.get().trim());
       //System.out.println(headerProperty.get() + " " + inputProperty.get());
       //clear the error label and the input field
       clear();
 
       //reload the updated conversation
-      String updatedConversation = model.getWholeConversation();
+      String updatedConversation = model.getWholeConversation(headerProperty.get());
       //listProperty.set(Logger.getInstance().extractOnlyMessages(updatedConversation));
+      //listProperty.clear();
       listProperty.set(updatedConversation);
     }
-    catch (Exception e)
+    catch(IllegalArgumentException e)
     {
       errorProperty.set(e.getMessage());
     }
   }
-
   public void clear()
   {
     listProperty.set(null);
@@ -89,18 +82,21 @@ public class ChatViewModel implements PropertyChangeListener
     errorProperty.set(null);
   }
 
-  public void reset()
-  {
+
+  public void reset() {
     headerProperty.set(viewModelState.getUsername());
   }
 
-  @Override public void propertyChange(PropertyChangeEvent evt) {
-    if ("broadcast".equals(evt.getPropertyName())) {
-
-      // Update the conversation when a broadcast message is received
-      Platform.runLater(() -> {
-        String updatedConversation = model.getWholeConversation();
-        listProperty.set(updatedConversation);
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    {
+      Platform.runLater(()->{
+        //for(int i=0; i<model.getUsers().getSize(); i++)
+        {
+          //model.send(model.getUsers().getUser(i).getUsername(), ((CommunicationPackage)evt.getNewValue()).toString());
+          //model.getWholeConversation(model.getUsers().getUser(i).getUsername());
+          listProperty.set(listProperty.get()+'\n'+ ((CommunicationPackage)evt.getNewValue()).toString());
+        }
       });
     }
   }

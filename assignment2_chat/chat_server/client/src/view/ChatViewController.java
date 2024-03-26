@@ -7,7 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import viewmodel.ChatViewModel;
 
-public class ChatViewController
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ChatViewController implements PropertyChangeListener
 {
   @FXML private Label headerLabel;
   @FXML private TextArea chatList;
@@ -25,12 +28,10 @@ public class ChatViewController
     this.viewHandler = viewHandler;
     this.chatViewModel=chatViewModel;
     headerLabel.textProperty().bindBidirectional(chatViewModel.getHeaderProperty());
-    //chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
+    chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
-
-    chatViewModel.getListProperty().addListener((obs,oldV,newV)->chatList.setText(newV.toString()+"\n"+chatList.getText()));
-
+    chatViewModel.addListener(this);
     reset();
   }
   public void reset()
@@ -48,7 +49,18 @@ public class ChatViewController
   @FXML public void sendPressed()
   {
     chatViewModel.send();
+    inputField.requestFocus();
+    if(chatList.getText()!=null && !chatList.getText().isEmpty())
+      chatList.positionCaret(chatList.getText().length());
+  }
+  @FXML public void onEnter()
+  {
+    sendPressed();
   }
 
-
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    if(chatList.getText()!=null && !chatList.getText().isEmpty())
+      chatList.positionCaret(chatList.getText().length());
+  }
 }

@@ -4,40 +4,46 @@ import java.util.ArrayList;
 
 public class UserList
 {
-  private ArrayList<String> users;
-  private PasswordChecker checker;
+  private ArrayList<User> users;
 
   public UserList()
   {
     users = new ArrayList<>();
-    checker=new PasswordChecker();
   }
-  public String getSize()
+  public int getSize()
   {
-    return "Number of chatters: " + users.size();
+    return users.size();
+  }
+  public User getUser(String username)
+  {
+    for(int i=0; i<users.size(); i++)
+    {
+      if(username.equals(users.get(i).getUsername()))
+        return users.get(i);
+    }
+    return null;
+  }
+  public User getUser(int index)
+  {
+    return users.get(index);
   }
 
-  public void addUser(String username, String password) throws IllegalArgumentException
+  public void addUser(User user)
   {
-    checker.check(password);
-    if(users.contains(username))
-      throw new IllegalArgumentException("This username is taken");
-    else if (username.length()<3)
-      throw new IllegalArgumentException("The username is too short");
-    else if(username.length()>25)
-      throw new IllegalArgumentException("The username is too long");
+    if(getUser(user.getUsername())!=null)
+        throw new IllegalArgumentException("This username is taken");
     else
-      users.add(username);
+     users.add(user);
   }
   public String getLast()
   {
-    return "Last joined: " + users.get(users.size()-1);
+    return users.get(users.size()-1).getUsername();
   }
 
   @Override public String toString() {
     String userList="Users:";
     for(int i=0; i< users.size(); i++)
-      userList=userList+'\n'+users.get(i);
+      userList=userList+'\n'+users.get(i).getUsername();
     return userList;
   }
 }

@@ -28,9 +28,6 @@ public class ChatViewController
     //chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
-
-    chatViewModel.getListProperty().addListener((obs,oldV,newV)->chatList.setText(newV.toString()+"\n"+chatList.getText()));
-
     reset();
   }
   public void reset()
@@ -48,6 +45,13 @@ public class ChatViewController
   @FXML public void sendPressed()
   {
     chatViewModel.send();
+    inputField.requestFocus();
+    if(chatList.getText()!=null && !chatList.getText().isEmpty())
+      chatList.positionCaret(chatList.getText().length());
+  }
+  @FXML public void onEnter()
+  {
+    sendPressed();
   }
 
 

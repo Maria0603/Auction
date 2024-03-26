@@ -2,59 +2,61 @@ package model;
 
 
 import mediator.ChatClient;
-import mediator.ServerModel;
 import utility.observer.javaobserver.NamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.IOException;
 
-public class ChatModelManager implements ChatModel, PropertyChangeListener
+public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject, PropertyChangeListener
 {
-
   private PropertyChangeSupport property;
+  private ChatClient client;
 
-  private ServerModel server;
-
-  public ChatModelManager() {
-
-    property=new PropertyChangeSupport(this);
-
-    server = new ChatClient();  //  Has defaults
-
-    server.addListener("broadcast",this);
-    server.connect();
-  }
-
-  @Override public void send(String username, String message)
+  public ChatModelManager()
   {
-    server.send(username,message);
+    try
+    {
+      client = new ChatClient("localhost", 3138);
+      property = new PropertyChangeSupport(this);
+      //System.out.println(Logger.getInstance().getOutput());
+      client.addListener("Message", this);
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+
+  }
+  @Override public String send(String username, String message)
+  {
+    return client.send(username, message);
   }
 
-  @Override public String getWholeConversation()
+  @Override public String getWholeConversation(String username)
   {
-    return server.getWholeConversation();
+    return client.getWholeConversation(username);
   }
 
-  @Override public void createUser(String username, String password) throws IllegalArgumentException
+  @Override public void createUser(String username, String password)
   {
-    server.createUser(username,password);
+    client.createUser(username, password);
   }
+
+
   @Override public void addListener(String propertyName, PropertyChangeListener listener)
   {
-    property.addPropertyChangeListener(propertyName, listener);
+    client.addListener(propertyName, listener);
   }
 
   @Override public void removeListener(String propertyName, PropertyChangeListener listener)
   {
-    property.addPropertyChangeListener(propertyName, listener);
+    client.removeListener(propertyName, listener);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    String propertyName = evt.getPropertyName();
-    if ("broadcast".equals(propertyName)) {
-      property.firePropertyChange("broadcast", evt.getOldValue(), evt.getNewValue());
-    }
+    property.firePropertyChange(evt);
   }
 }
