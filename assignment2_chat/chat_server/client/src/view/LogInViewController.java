@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import viewmodel.LogInViewModel;
 
 public class LogInViewController {
-  @FXML
+ @FXML
   private TextField usernameField, passwordField;
   @FXML
   private Label headerLabel, errorLabel;

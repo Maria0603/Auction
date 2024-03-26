@@ -7,48 +7,41 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import viewmodel.ChatViewModel;
 
-public class ChatViewController
-{
+public class ChatViewController {
   @FXML private Label headerLabel;
   @FXML private TextArea chatList;
   @FXML private TextField inputField;
   @FXML private Label errorLabel;
+
   private Region root;
   private ViewHandler viewHandler;
   private ChatViewModel chatViewModel;
 
-  //initializations and bindings
   public void init(ViewHandler viewHandler,
-      ChatViewModel chatViewModel, Region root)
-  {
+      ChatViewModel chatViewModel, Region root) {
     this.root = root;
     this.viewHandler = viewHandler;
-    this.chatViewModel=chatViewModel;
+    this.chatViewModel = chatViewModel;
+
+    // Bind properties
     headerLabel.textProperty().bindBidirectional(chatViewModel.getHeaderProperty());
-    //chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
+    chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
 
-    chatViewModel.getListProperty().addListener((obs,oldV,newV)->chatList.setText(newV.toString()+"\n"+chatList.getText()));
-
     reset();
   }
-  public void reset()
-  {
+
+  public void reset() {
     chatViewModel.reset();
   }
 
-  public Region getRoot()
-  {
+  public Region getRoot() {
     return root;
   }
 
-
-  //triggered by pressing the Send button
-  @FXML public void sendPressed()
-  {
+  @FXML
+  public void sendPressed() {
     chatViewModel.send();
   }
-
-
 }

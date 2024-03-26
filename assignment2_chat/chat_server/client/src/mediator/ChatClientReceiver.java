@@ -24,15 +24,17 @@ public class ChatClientReceiver implements Runnable
   {
     try
     {
-      String receivedMessage;
-      while ((receivedMessage = in.readLine()) != null)
+
+        String receivedMessage;
+        while ((receivedMessage = in.readLine()) != null)
+        {
+          client.receive();
+        }
+      }
+      catch (IOException e)
       {
-        client.receive(receivedMessage);
+        System.err.println("Error reading message from server: " + e.getMessage());
       }
     }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
-  }
+
 }

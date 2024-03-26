@@ -32,10 +32,20 @@ public class ChatClient implements ServerModel, NamedPropertyChangeSubject
     this.property = new PropertyChangeSupport(this);
   }
 
+
   public ChatClient()
   {
     this("localhost", 1234);
   }   //  Default constructor
+
+  public ChatClient(String serverHost, int serverPort, String username, String password)
+  {
+    this.HOST = serverHost;
+    this.PORT = serverPort;
+    this.property = new PropertyChangeSupport(this);
+    username = new String();
+    password = new String();
+  }
 
   //  TODO: send(+), getWholeConversation(+), createUser(String username, String password)
   //        and logic behind broadcast +
@@ -53,12 +63,26 @@ public class ChatClient implements ServerModel, NamedPropertyChangeSubject
     }
   }
 
-  public void receive(String c)
-  {
-    //  Might want to fire broadcast here for model to listen to
-    property.firePropertyChange("broadcast", null, c);
+  public String receive() {
+    String receivedMessage = receiveMessageFromServer();
+    if (receivedMessage != null && !receivedMessage.isEmpty()) {
 
+      System.out.println("Received message from server: " + receivedMessage);
+    }
+    return receivedMessage;
   }
+
+  private String receiveMessageFromServer() {
+    try {
+      // Read a line from the input stream
+      String message = in.readLine();
+      return message;
+    } catch (IOException e) {
+      handleClientError("Error receiving message from server: " + e.getMessage());
+      return null;
+    }
+  }
+
 
   @Override public String getWholeConversation()
   {
@@ -107,28 +131,50 @@ public class ChatClient implements ServerModel, NamedPropertyChangeSubject
     }
   }
 
-  @Override public void connect()
-  {
-    try
-    {
-      Socket socket = new Socket(HOST, PORT);
-      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      out = new PrintWriter(socket.getOutputStream(), true);
-      gson = new Gson();
+//  @Override public void connect()
+//  {
+//    try
+//    {
+//      Socket socket = new Socket(HOST, PORT);
+//      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//      out = new PrintWriter(socket.getOutputStream(), true);
+//      gson = new Gson();
+//
+//      //  Starting the receiver thread here
+//      ChatClientReceiver receiver = new ChatClientReceiver(this, in);
+//      Thread thread = new Thread(receiver);
+//      thread.setDaemon(true);
+//      thread.start();
+//
+//    }
+//    catch (IOException e)
+//    {
+//      throw new RuntimeException(e);
+//    }
+//  }
+@Override
+public void connect() {
+  try {
+    System.out.println("Connecting to server...");
+    Socket socket = new Socket(HOST, PORT);
+    System.out.println("Connected to server.");
 
-      //  Starting the receiver thread here
-      ChatClientReceiver receiver = new ChatClientReceiver(this, in);
-      Thread thread = new Thread(receiver);
-      thread.setDaemon(true);
-      thread.start();
+    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    out = new PrintWriter(socket.getOutputStream(), true);
+    gson = new Gson();
 
-    }
-    catch (IOException e)
-    {
-      throw new RuntimeException(e);
-    }
+    // Starting the receiver thread here
+    System.out.println("Starting receiver thread...");
+    ChatClientReceiver receiver = new ChatClientReceiver(this, in);
+    Thread thread = new Thread(receiver);
+    thread.setDaemon(true);
+    thread.start();
+
+  } catch (IOException e) {
+    System.err.println("Error connecting to server: " + e.getMessage());
+    throw new RuntimeException(e);
   }
-
+}
   @Override public void disconnect()
   {
     try

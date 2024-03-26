@@ -9,10 +9,10 @@ import viewmodel.ChatViewModel;
 
 public class ChatViewController
 {
-@FXML private Label headerLabel;
-@FXML private TextArea chatList;
-@FXML private TextField inputField;
-@FXML private Label errorLabel;
+  @FXML private Label headerLabel;
+  @FXML private TextArea chatList;
+  @FXML private TextField inputField;
+  @FXML private Label errorLabel;
   private Region root;
   private ViewHandler viewHandler;
   private ChatViewModel chatViewModel;
@@ -25,12 +25,9 @@ public class ChatViewController
     this.viewHandler = viewHandler;
     this.chatViewModel=chatViewModel;
     headerLabel.textProperty().bindBidirectional(chatViewModel.getHeaderProperty());
-    //chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
+    chatList.textProperty().bindBidirectional(chatViewModel.getListProperty());
     inputField.textProperty().bindBidirectional(chatViewModel.getInputProperty());
     errorLabel.textProperty().bindBidirectional(chatViewModel.getErrorProperty());
-
-    chatViewModel.getListProperty().addListener((obs,oldV,newV)->chatList.setText(newV.toString()+"\n"+chatList.getText()));
-
     reset();
   }
   public void reset()
@@ -48,6 +45,12 @@ public class ChatViewController
   @FXML public void sendPressed()
   {
     chatViewModel.send();
+    inputField.requestFocus();
+    chatList.scrollTopProperty().set(chatList.getHeight()*20000);
+  }
+  @FXML public void onEnter()
+  {
+    sendPressed();
   }
 
 

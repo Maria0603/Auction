@@ -6,6 +6,10 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import viewmodel.ViewModelFactory;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
 public class ViewHandler
 {
   private Stage primaryStage;
@@ -13,7 +17,6 @@ public class ViewHandler
   private ViewModelFactory viewModelFactory;
   private ChatViewController chatViewController;
   private LogInViewController logInViewController;
-
 
   public ViewHandler(ViewModelFactory viewModelFactory)
   {
@@ -33,24 +36,25 @@ public class ViewHandler
     switch (id)
     {
       case "chat":
-        root = loadChatView("chatView.fxml");
+        root = loadView("chatView.fxml");
         break;
       case "login":
-        root = loadlogInView("logInView.fxml");
+        root = loadView("logInView.fxml");
         break;
     }
-    currentScene.setRoot(root);
-    String title = "";
-    if (root.getUserData() != null)
+    if (root != null)
     {
-      title += root.getUserData();
+      currentScene.setRoot(root);
+      String title =
+          root.getUserData() != null ? root.getUserData().toString() : "";
+      primaryStage.setTitle(title);
+      primaryStage.setScene(currentScene);
+      primaryStage.show();
     }
-
-    primaryStage.setTitle(title);
-    primaryStage.setScene(currentScene);
-    //primaryStage.setWidth(root.getPrefWidth());
-    //primaryStage.setHeight(root.getPrefHeight());
-    primaryStage.show();
+    else
+    {
+      System.err.println("Failed to load view with ID: " + id);
+    }
   }
 
   public void closeView()
@@ -58,54 +62,55 @@ public class ViewHandler
     primaryStage.close();
   }
 
-  private Region loadlogInView(String fxmlFile)
+  private Region loadView(String fxmlFile)
   {
-    if (logInViewController == null)
+    try
     {
-      try
+      FXMLLoader loader = new FXMLLoader();
+      URL location = getClass().getResource(fxmlFile);
+      if (location == null)
       {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxmlFile));
-        Region root = loader.load();
-        logInViewController = loader.getController();
-        logInViewController
-            .init(this, viewModelFactory.getLogInViewModel(), root);
+        throw new IOException("FXML file not found: " + fxmlFile);
       }
-      catch (Exception e)
-      {
-        e.printStackTrace();
-      }
-    }
-    else
-    {
-      logInViewController.reset();
-    }
-    return logInViewController.getRoot();
-  }
+      loader.setLocation(location);
 
-  private Region loadChatView(String fxmlFile)
-  {
-    if (chatViewController == null)
-    {
-      try
-      {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxmlFile));
-        Region root = loader.load();
+      // Set encoding to UTF-8
+      loader.setCharset(StandardCharsets.UTF_8);
 
-        chatViewController = loader.getController();
-        chatViewController
-            .init(this, viewModelFactory.getChatViewModel(), root);
-      }
-      catch (Exception e)
+      Region root = loader.load();
+
+      // Determine the type of controller based on the loaded FXML file
+      Object controller = loader.getController();
+      if (controller instanceof ChatViewController)
       {
-        e.printStackTrace();
+        chatViewController = (ChatViewController) controller;
       }
+      else if (controller instanceof LogInViewController)
+      {
+        logInViewController = (LogInViewController) controller;
+      }
+      else
+      {
+        throw new IOException("Unknown controller type for FXML file: " + fxmlFile);
+      }
+
+      // Initialize the controller
+      if (chatViewController != null)
+      {
+        chatViewController.init(this, viewModelFactory.getChatViewModel(), root);
+      }
+      else if (logInViewController != null)
+      {
+        logInViewController.init(this, viewModelFactory.getLogInViewModel(),
+            root);
+      }
+
+      return root;
     }
-    else
+    catch (IOException e)
     {
-      chatViewController.reset();
+      e.printStackTrace(); // Handle or log the exception appropriately
+      return null;
     }
-    return chatViewController.getRoot();
   }
 }
