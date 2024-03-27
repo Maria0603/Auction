@@ -22,13 +22,11 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
   private PrintWriter out;
   private Gson gson;
   private PropertyChangeSupport property;
-  private CommunicationPackage receivedCommunication;
   private ArrayList<CommunicationPackage> receivedCommunications;
   private UserPackage receivedUser;
 
   public ChatClient(String host, int port) throws IOException
   {
-    receivedCommunication=null;
     receivedUser=null;
     receivedCommunications=new ArrayList<>();
     socket=new Socket(host, port);
@@ -91,8 +89,6 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
           e.printStackTrace();
         }
       }
-      //found=true;
-      //System.out.println("Found");
 
     }
     if(received.getType().equals("Error"))
@@ -122,15 +118,6 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
       return waitForReply("Message", username);
     }
 
-  }
-
-  @Override public String getWholeConversation(String username)
-  {
-    CommunicationPackage pack=new CommunicationPackage("Conversation", username, null, null);
-    out.println(gson.toJson(pack));
-    System.out.println("Sent - conversation: " + pack);
-
-    return waitForReply("Conversation", username);
   }
 
 

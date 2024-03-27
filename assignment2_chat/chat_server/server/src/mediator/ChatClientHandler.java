@@ -105,7 +105,7 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     System.out.println(evt.getPropertyName()  + " received in the ClientHandler");
-    CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), ((CommunicationPackage)evt.getNewValue()).getSender(), ((CommunicationPackage)evt.getNewValue()).getRequest(), ((CommunicationPackage)evt.getNewValue()).getReply());
+    CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), evt.getOldValue()+"", evt.getNewValue()+"", null);
     String toJson=gson.toJson(broadcast);
     out.println(toJson);
   }

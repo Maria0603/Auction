@@ -18,32 +18,13 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   {
     this.userList = new UserList();
     property=new PropertyChangeSupport(this);
-    //System.out.println(Logger.getInstance().getOutput());
   }
-  @Override public String send(String username, String message)
+  @Override public void send(String username, String message)
   {
-    if (message.isEmpty())
+    if (!message.startsWith("/"))
     {
-      throw new IllegalArgumentException("No input");
+      property.firePropertyChange("Message", username, message);
     }
-    if(message.startsWith("/"))
-    {
-      return userList.getUser(username).getConversation();
-    }
-    else
-    {
-      property.firePropertyChange("Message", null, new CommunicationPackage("Message", username, message, null));
-      return userList.getUser(username).getConversation();
-    }
-  }
-
-  @Override public String getWholeConversation(String username)
-  {
-    return userList.getUser(username).getConversation();
-  }
-  @Override public void addContent(String username, String content)
-  {
-      userList.getUser(username).addContent(content);
   }
 
   @Override public void createUser(String username, String password) throws IllegalArgumentException

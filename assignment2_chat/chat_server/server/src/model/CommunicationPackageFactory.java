@@ -10,9 +10,7 @@ public class CommunicationPackageFactory extends PackageFactory {
   {
     if(!type.equals("Create"))
     {
-      if (type.equals("Conversation"))
-        return new CommunicationPackage("Conversation", sender, null, getModel().getWholeConversation(sender));
-      else if (type.equals("Message"))
+      if (type.equals("Message"))
       {
         if (request.isEmpty())
           return new CommunicationPackage("Error", sender, request, "No input");
