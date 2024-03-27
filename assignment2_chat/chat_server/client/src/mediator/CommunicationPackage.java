@@ -1,23 +1,22 @@
-package model;
+package mediator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CommunicationPackage extends Package
+public class CommunicationPackage
 {
   private String type, sender, request, reply;
 
   public CommunicationPackage(String type, String sender, String request, String reply)
   {
-    super();
     this.type=type;
     this.sender=sender;
     this.request=request;
     this.reply=reply;
   }
 
-  @Override public String toString()
+  public String toString()
   {
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat(

@@ -3,11 +3,8 @@ package viewmodel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.ChatModel;
-import model.CommunicationPackage;
-import observer.UnnamedPropertyChangeSubject;
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -91,7 +88,7 @@ public class ChatViewModel implements PropertyChangeListener,
     {
       Platform.runLater(()->{
         {
-          if(!((CommunicationPackage)evt.getNewValue()).getSender().equals(headerProperty.get()))
+          if(!(evt.getOldValue()).equals(headerProperty.get()))
           {
             listProperty.set(listProperty.get() + evt.getNewValue().toString());
             property.firePropertyChange("Scroll down", null, null);

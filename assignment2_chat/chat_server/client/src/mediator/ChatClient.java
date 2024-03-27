@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Map;
-import model.Package;
 
 public class ChatClient implements ChatModel, NamedPropertyChangeSubject
 {
@@ -26,14 +25,13 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
   private CommunicationPackage receivedCommunication;
   private ArrayList<CommunicationPackage> receivedCommunications;
   private UserPackage receivedUser;
-  private String ip;
+
   public ChatClient(String host, int port) throws IOException
   {
     receivedCommunication=null;
     receivedUser=null;
     receivedCommunications=new ArrayList<>();
     socket=new Socket(host, port);
-    ip=socket.getInetAddress().getHostAddress();
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     out = new PrintWriter(socket.getOutputStream(), true);
     property = new PropertyChangeSupport(this);
@@ -57,7 +55,7 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
 
       if(received.getType().equals("Message"))
       {
-        property.firePropertyChange("Message", null, received);
+        property.firePropertyChange("Message", received.getSender(), received);
         System.out.println("In the receive method - broadcast: " + received);
       }
     }
@@ -121,7 +119,6 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
       out.println(gson.toJson(pack));
       System.out.println("Sent - message: " + pack);
 
-      Logger.getInstance().addLog(ip + " " + pack);
       return waitForReply("Message", username);
     }
 

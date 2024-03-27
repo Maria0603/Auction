@@ -20,12 +20,14 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
   private boolean running;
   private ChatModel model;
   private Gson gson;
-  public ChatClientHandler(Socket socket, ChatModel model)
+  private String clientIP;
+  public ChatClientHandler(Socket socket, ChatModel model, String clientIP)
   {
     this.socket=socket;
     this.model=model;
     gson=new Gson();
     running=true;
+    this.clientIP=clientIP;
     model.addListener("Message", this);
   }
 
@@ -82,6 +84,7 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
         if(sendPackage.getType().equals("Message"))
         {
           model.send(sendPackage.getSender(), sendPackage.getRequest());
+          Logger.getInstance().addLog("IP: " + clientIP +"; " + sendPackage);
           System.out.println("Sent through model: " + sendPackage);
         }
         else

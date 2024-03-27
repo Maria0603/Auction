@@ -3,6 +3,7 @@ package mediator;
 import model.ChatModel;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -39,7 +40,9 @@ public class ChatServer implements Runnable
       while(running)
       {
         Socket socket = welcomeSocket.accept();
-        ChatClientHandler clientHandler = new ChatClientHandler(socket, model);
+        InetSocketAddress socketAddress=(InetSocketAddress) socket.getRemoteSocketAddress();
+        String clientIP=socketAddress.getAddress().getHostAddress();
+        ChatClientHandler clientHandler = new ChatClientHandler(socket, model, clientIP);
         Thread clientThread = new Thread(clientHandler);
         clientThread.setDaemon(true);
         clientThread.start();

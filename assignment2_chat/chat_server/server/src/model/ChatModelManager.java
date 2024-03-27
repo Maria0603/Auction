@@ -18,6 +18,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   {
     this.userList = new UserList();
     property=new PropertyChangeSupport(this);
+    //System.out.println(Logger.getInstance().getOutput());
   }
   @Override public String send(String username, String message)
   {
