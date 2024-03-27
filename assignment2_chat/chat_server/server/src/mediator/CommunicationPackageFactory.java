@@ -1,6 +1,9 @@
-package model;
+package mediator;
 
-public class CommunicationPackageFactory extends PackageFactory {
+import model.ChatModel;
+
+public class CommunicationPackageFactory extends PackageFactory
+{
   public CommunicationPackageFactory(ChatModel model)
   {
     super(model);

@@ -1,4 +1,6 @@
-package model;
+package mediator;
+
+import model.ChatModel;
 
 public abstract class PackageFactory
 {

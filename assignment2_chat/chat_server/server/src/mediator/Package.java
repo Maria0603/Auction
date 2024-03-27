@@ -1,4 +1,4 @@
-package model;
+package mediator;
 
 public abstract class Package {
 

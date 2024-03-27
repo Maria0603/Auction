@@ -1,4 +1,4 @@
-package model;
+package mediator;
 
 public class UserPackage extends Package
 {

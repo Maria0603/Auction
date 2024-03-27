@@ -1,6 +1,9 @@
-package model;
+package mediator;
 
-public class UserPackageFactory extends PackageFactory {
+import model.ChatModel;
+
+public class UserPackageFactory extends PackageFactory
+{
 
   public UserPackageFactory(ChatModel model)
   {
