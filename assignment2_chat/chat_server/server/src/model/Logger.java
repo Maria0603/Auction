@@ -6,13 +6,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class Logger {
+public class Logger
+{
   private static Logger instance;
   private static final Object lock = new Object();
 
-  private static String output;
+  private String output;
 
-  private Logger() {
+  private Logger()
+  {
     output = "";
   }
 
@@ -31,17 +33,19 @@ public class Logger {
   {
     output+=text+'\n';
     addToFile(text +'\n');
-    //System.out.println(text);
   }
+
   public String getOutput()
   {
     return output;
   }
+
   public String getSortableDate()
   {
     DateTimeFormatter dtf= DateTimeFormatter.ofPattern("yyyy-MM-dd");
     return LocalDateTime.now().format(dtf);
   }
+
   private void addToFile(String line)
   {
     if (line == null)

@@ -1,11 +1,11 @@
-package model;
+package mediator;
 
-public class UserPackage extends Package
+//for transporting data
+public class UserPackage
 {
   private String type, username, password, error;
   public UserPackage(String type, String username, String password)
   {
-    super();
     this.type=type;
     this.username = username;
     this.password = password;
@@ -20,7 +20,7 @@ public class UserPackage extends Package
     this.password=null;
   }
 
-  @Override public String toString()
+   public String toString()
   {
     if(error==null)
      return type + " " + username + " " + password;

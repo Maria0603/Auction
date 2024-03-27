@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Map;
-import model.Package;
 
 public class ChatClient implements ChatModel, NamedPropertyChangeSubject
 {
@@ -23,17 +22,14 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
   private PrintWriter out;
   private Gson gson;
   private PropertyChangeSupport property;
-  private CommunicationPackage receivedCommunication;
   private ArrayList<CommunicationPackage> receivedCommunications;
   private UserPackage receivedUser;
-  private String ip;
+
   public ChatClient(String host, int port) throws IOException
   {
-    receivedCommunication=null;
     receivedUser=null;
     receivedCommunications=new ArrayList<>();
     socket=new Socket(host, port);
-    ip=socket.getInetAddress().getHostAddress();
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     out = new PrintWriter(socket.getOutputStream(), true);
     property = new PropertyChangeSupport(this);
@@ -43,12 +39,12 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
     t.start();
   }
 
+  //Replies from the server
   public synchronized void receive(String s)
   {
     if(gson.fromJson(s, Map.class).get("type").equals("Create") || gson.fromJson(s, Map.class).get("type").equals("UserError"))
     {
         receivedUser=gson.fromJson(s, UserPackage.class);
-        System.out.println("In the receive method - user: " + receivedUser);
     }
     else
     {
@@ -57,14 +53,14 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
 
       if(received.getType().equals("Message"))
       {
-        property.firePropertyChange("Message", null, received);
-        System.out.println("In the receive method - broadcast: " + received);
+        property.firePropertyChange("Message", received.getSender(), received);
       }
     }
+    //wake up the waiting thread
     notify();
-    System.out.println("Notified");
   }
 
+  //wait for CommunicationPackages to be delivered from the server
   private synchronized String waitForReply(String type, String username)
   {
     boolean found=false;
@@ -84,17 +80,13 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
       {
         try
         {
-          System.out.println("Wait1...");
           wait();
-          System.out.println("Wait2...");
         }
         catch (InterruptedException e)
         {
-          e.printStackTrace();
+          //
         }
       }
-      //found=true;
-      //System.out.println("Found");
 
     }
     if(received.getType().equals("Error"))
@@ -106,42 +98,32 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
 
   }
 
+  //send the content of the input field along with the name of the sender to the server
   @Override public String send(String username, String message)
   {
     if(message.startsWith("/"))
     {
       CommunicationPackage pack=new CommunicationPackage("Command", username, message, null);
       out.println(gson.toJson(pack));
-      System.out.println("Sent - command: " + pack);
+
+      //and return the reply in order to be appended to the conversation
       return waitForReply("Command", username);
     }
     else
     {
       CommunicationPackage pack=new CommunicationPackage("Message", username, message, null);
       out.println(gson.toJson(pack));
-      System.out.println("Sent - message: " + pack);
 
-      Logger.getInstance().addLog(ip + " " + pack);
       return waitForReply("Message", username);
     }
 
   }
 
-  @Override public String getWholeConversation(String username)
-  {
-    CommunicationPackage pack=new CommunicationPackage("Conversation", username, null, null);
-    out.println(gson.toJson(pack));
-    System.out.println("Sent - conversation: " + pack);
-
-    return waitForReply("Conversation", username);
-  }
-
-
+  //ask the server to create a user with the entered data
   @Override public synchronized void createUser(String username, String password)
   {
     UserPackage pack=new UserPackage("Create", username, password);
     out.println(gson.toJson(pack));
-    System.out.println("Sent: " + pack.toString());
     try
     {
       wait();
@@ -150,6 +132,8 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
     {
       //
     }
+
+    //if the data is wrong, throw exception to be displayed in the error label
     if(receivedUser.getType().equals("UserError"))
     {
       String error=receivedUser.getError();

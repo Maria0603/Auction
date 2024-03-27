@@ -15,6 +15,7 @@ public class ChatClientReceiver implements Runnable
     running=true;
   }
 
+  //Always expect packages from the server
   @Override public void run()
   {
     running=true;
@@ -23,7 +24,6 @@ public class ChatClientReceiver implements Runnable
       try
       {
         String line = in.readLine();
-        System.out.println("Received in reader: " + line);
         client.receive(line);
       }
       catch (IOException e)
@@ -32,6 +32,7 @@ public class ChatClientReceiver implements Runnable
       }
     }
   }
+
   public void close()
   {
     try

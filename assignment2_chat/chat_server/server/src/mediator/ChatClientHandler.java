@@ -20,15 +20,18 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
   private boolean running;
   private ChatModel model;
   private Gson gson;
-  public ChatClientHandler(Socket socket, ChatModel model)
+  private String clientIP;
+  public ChatClientHandler(Socket socket, ChatModel model, String clientIP)
   {
     this.socket=socket;
     this.model=model;
     gson=new Gson();
     running=true;
+    this.clientIP=clientIP;
     model.addListener("Message", this);
   }
 
+  //Always wait for requests from the clients
   @Override public void run()
   {
     try
@@ -45,8 +48,8 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
     try
     {
       String request = in.readLine();
-      System.out.println("Received in client handler: " + request);
 
+      //if it is related to the account creation window
       if (gson.fromJson(request, Map.class).get("type").equals("Create"))
       {
         UserPackage receivedPackage = gson.fromJson(request, UserPackage.class);
@@ -63,46 +66,62 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
         }
         String toJson = gson.toJson(sendPackage);
         out.println(toJson);
-        System.out.println("Sent: " + toJson);
       }
+      //or to the chat window
       else
       {
         CommunicationPackageFactory factory = new CommunicationPackageFactory(
             model);
         CommunicationPackage receivedPackageUnchecked = gson.fromJson(request,
             CommunicationPackage.class);
-        System.out.println("Client handler run method: " + receivedPackageUnchecked.getType() +  " " + receivedPackageUnchecked.getSender() + " " + receivedPackageUnchecked.getRequest() + " " + receivedPackageUnchecked.getReply() + '\n');
 
+        //create the answer for the client
         CommunicationPackage sendPackage = (CommunicationPackage) factory.getPackage(
             receivedPackageUnchecked.getType(), receivedPackageUnchecked.getSender(),
             receivedPackageUnchecked.getRequest(), receivedPackageUnchecked.getReply());
         String toJson = gson.toJson(sendPackage);
 
-
+        //if we receive a message
         if(sendPackage.getType().equals("Message"))
         {
+          //we send it through model to fire an event
           model.send(sendPackage.getSender(), sendPackage.getRequest());
-          System.out.println("Sent through model: " + sendPackage);
+
+          //and we add a log to the file
+          Logger.getInstance().addLog("IP: " + clientIP +"; " + sendPackage);
         }
+        //if it is a command, we send the reply to the client
         else
         {
           out.println(toJson);
-          System.out.println("Sent: " + toJson);
         }
       }
       }
       catch (Exception e)
       {
-        e.printStackTrace();
+        close();
       }
     }
 
   }
 
+  public void close()
+  {
+    try
+    {
+      in.close();
+      out.close();
+    }
+    catch (IOException e)
+    {
+      //
+    }
+  }
+
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    System.out.println(evt.getPropertyName()  + " received in the ClientHandler");
-    CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), ((CommunicationPackage)evt.getNewValue()).getSender(), ((CommunicationPackage)evt.getNewValue()).getRequest(), ((CommunicationPackage)evt.getNewValue()).getReply());
+    //if we receive a message, we send it to all clients
+    CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), evt.getOldValue()+"", evt.getNewValue()+"", null);
     String toJson=gson.toJson(broadcast);
     out.println(toJson);
   }

@@ -3,11 +3,8 @@ package viewmodel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.ChatModel;
-import model.CommunicationPackage;
-import observer.UnnamedPropertyChangeSubject;
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -63,6 +60,7 @@ public class ChatViewModel implements PropertyChangeListener,
     {
       if(inputProperty.get()!=null && !inputProperty.get().trim().isEmpty())
       {
+        //send the data to the server and append the reply
         listProperty.set(listProperty.get() + model.send(headerProperty.get(), inputProperty.get().trim()));
       }
       //clear the error label and the input field
@@ -87,13 +85,15 @@ public class ChatViewModel implements PropertyChangeListener,
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    System.out.println("Received in the chat view model: " + evt.getNewValue().toString());
     {
       Platform.runLater(()->{
         {
-          if(!((CommunicationPackage)evt.getNewValue()).getSender().equals(headerProperty.get()))
+          //if it was the same user the one who sent it, it is already displayed
+          if(!(evt.getOldValue()).equals(headerProperty.get()))
           {
+            //append the message from other users to the conversation
             listProperty.set(listProperty.get() + evt.getNewValue().toString());
+            //tell the viewController to scroll down
             property.firePropertyChange("Scroll down", null, null);
           }
         }

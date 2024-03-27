@@ -3,12 +3,10 @@ package model;
 public class User
 {
   private String username, password;
-  private String conversation;
   public User(String username, String password)
   {
     setUsername(username);
     setPassword(password);
-    conversation="Your conversation \n";
   }
 
   public void setPassword(String password)
@@ -28,19 +26,10 @@ public class User
         throw new IllegalArgumentException("The username is too long");
       else this.username=username;
   }
-  public void addContent(String text)
-  {
-    conversation += text+'\n';
-  }
 
   public String getUsername()
   {
     return username;
-  }
-
-  public String getConversation()
-  {
-    return conversation;
   }
 
 

@@ -50,6 +50,8 @@ public class ChatViewController implements PropertyChangeListener
   {
     chatViewModel.send();
     inputField.requestFocus();
+
+    //when a message is sent, scroll down
     if(chatList.getText()!=null && !chatList.getText().isEmpty())
       chatList.positionCaret(chatList.getText().length());
   }
@@ -60,6 +62,7 @@ public class ChatViewController implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
+    //when a message is sent by someone else, scroll down
     if(chatList.getText()!=null && !chatList.getText().isEmpty())
       chatList.positionCaret(chatList.getText().length());
   }

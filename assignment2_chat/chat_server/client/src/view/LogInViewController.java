@@ -23,8 +23,6 @@ public class LogInViewController {
         this.logInViewModel = viewModel;
         this.root = root;
 
-        //  HeaderLabel is just set to the "Create User!" in viewModel
-        //headerLabel.textProperty().bind(viewModel.getHeaderProperty());
         usernameField.textProperty().bindBidirectional(viewModel.getUsernameProperty());
         passwordField.textProperty().bindBidirectional(viewModel.getPasswordProperty());
         errorLabel.textProperty().bind(viewModel.getErrorProperty());
@@ -46,6 +44,7 @@ public class LogInViewController {
         if(errorLabel.getText()!=null && errorLabel.getText().isEmpty())
             viewHandler.openView("chat");
     }
+
     @FXML void onEnter()
     {
         usernameField.setOnKeyPressed(event -> {

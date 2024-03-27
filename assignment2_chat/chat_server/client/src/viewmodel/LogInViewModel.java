@@ -32,8 +32,8 @@ public class LogInViewModel
         try {
             model.createUser(getUsernameProperty().get(), getPasswordProperty().get());
             viewModelState.setUsername(getUsernameProperty().get());
-            //System.out.println(viewModelState.getUsername());
-        } catch (IllegalArgumentException e) {
+        }
+        catch (IllegalArgumentException e) {
             errorProperty.set(e.getMessage());
         }
     }

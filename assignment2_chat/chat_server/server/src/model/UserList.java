@@ -10,9 +10,9 @@ public class UserList
   {
     users = new ArrayList<>();
   }
-  public int getSize()
+  public String getSize()
   {
-    return users.size();
+    return "Number of previously connected users: \n" + users.size();
   }
   public User getUser(String username)
   {
@@ -22,10 +22,6 @@ public class UserList
         return users.get(i);
     }
     return null;
-  }
-  public User getUser(int index)
-  {
-    return users.get(index);
   }
 
   public void addUser(User user)
@@ -37,11 +33,11 @@ public class UserList
   }
   public String getLast()
   {
-    return users.get(users.size()-1).getUsername();
+    return "Last connected user: \n" + users.get(users.size()-1).getUsername();
   }
 
   @Override public String toString() {
-    String userList="Users:";
+    String userList="Users previously connected:";
     for(int i=0; i< users.size(); i++)
       userList=userList+'\n'+users.get(i).getUsername();
     return userList;

@@ -20,7 +20,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject, 
     {
       client = new ChatClient("localhost", 3138);
       property = new PropertyChangeSupport(this);
-      //System.out.println(Logger.getInstance().getOutput());
+
       client.addListener("Message", this);
     }
     catch (IOException e)
@@ -29,14 +29,11 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject, 
     }
 
   }
+
+  //delegate all work to the client side
   @Override public String send(String username, String message)
   {
     return client.send(username, message);
-  }
-
-  @Override public String getWholeConversation(String username)
-  {
-    return client.getWholeConversation(username);
   }
 
   @Override public void createUser(String username, String password)
