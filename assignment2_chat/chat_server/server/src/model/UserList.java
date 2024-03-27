@@ -23,10 +23,6 @@ public class UserList
     }
     return null;
   }
-  public User getUser(int index)
-  {
-    return users.get(index);
-  }
 
   public void addUser(User user)
   {
@@ -41,7 +37,7 @@ public class UserList
   }
 
   @Override public String toString() {
-    String userList="Users:";
+    String userList="Users previously connected:";
     for(int i=0; i< users.size(); i++)
       userList=userList+'\n'+users.get(i).getUsername();
     return userList;

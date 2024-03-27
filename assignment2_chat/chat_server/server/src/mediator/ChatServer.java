@@ -39,6 +39,7 @@ public class ChatServer implements Runnable
       welcomeSocket=new ServerSocket(PORT);
       while(running)
       {
+        System.out.println("Waiting for clients.....");
         Socket socket = welcomeSocket.accept();
         InetSocketAddress socketAddress=(InetSocketAddress) socket.getRemoteSocketAddress();
         String clientIP=socketAddress.getAddress().getHostAddress();

@@ -39,6 +39,13 @@ public class ChatClient implements ChatModel, NamedPropertyChangeSubject
     t.start();
   }
 
+  public void disconnect() throws IOException
+  {
+    in.close();
+    out.close();
+    socket.close();
+  }
+
   public synchronized void receive(String s)
   {
     if(gson.fromJson(s, Map.class).get("type").equals("Create") || gson.fromJson(s, Map.class).get("type").equals("UserError"))

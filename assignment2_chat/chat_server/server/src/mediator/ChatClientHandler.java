@@ -96,10 +96,23 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
       }
       catch (Exception e)
       {
-        e.printStackTrace();
+        close();
       }
     }
 
+  }
+
+  public void close()
+  {
+    try
+    {
+      in.close();
+      out.close();
+    }
+    catch (IOException e)
+    {
+      //
+    }
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
