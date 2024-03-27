@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+//for transporting data
 public class CommunicationPackage
 {
   private String type, sender, request, reply;

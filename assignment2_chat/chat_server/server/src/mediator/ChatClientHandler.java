@@ -31,6 +31,7 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
     model.addListener("Message", this);
   }
 
+  //Always wait for requests from the clients
   @Override public void run()
   {
     try
@@ -47,8 +48,8 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
     try
     {
       String request = in.readLine();
-      System.out.println("Received in client handler: " + request);
 
+      //if it is related to the account creation window
       if (gson.fromJson(request, Map.class).get("type").equals("Create"))
       {
         UserPackage receivedPackage = gson.fromJson(request, UserPackage.class);
@@ -65,32 +66,34 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
         }
         String toJson = gson.toJson(sendPackage);
         out.println(toJson);
-        System.out.println("Sent: " + toJson);
       }
+      //or to the chat window
       else
       {
         CommunicationPackageFactory factory = new CommunicationPackageFactory(
             model);
         CommunicationPackage receivedPackageUnchecked = gson.fromJson(request,
             CommunicationPackage.class);
-        System.out.println("Client handler run method: " + receivedPackageUnchecked.getType() +  " " + receivedPackageUnchecked.getSender() + " " + receivedPackageUnchecked.getRequest() + " " + receivedPackageUnchecked.getReply() + '\n');
 
+        //create the answer for the client
         CommunicationPackage sendPackage = (CommunicationPackage) factory.getPackage(
             receivedPackageUnchecked.getType(), receivedPackageUnchecked.getSender(),
             receivedPackageUnchecked.getRequest(), receivedPackageUnchecked.getReply());
         String toJson = gson.toJson(sendPackage);
 
-
+        //if we receive a message
         if(sendPackage.getType().equals("Message"))
         {
+          //we send it through model to fire an event
           model.send(sendPackage.getSender(), sendPackage.getRequest());
+
+          //and we add a log to the file
           Logger.getInstance().addLog("IP: " + clientIP +"; " + sendPackage);
-          System.out.println("Sent through model: " + sendPackage);
         }
+        //if it is a command, we send the reply to the client
         else
         {
           out.println(toJson);
-          System.out.println("Sent: " + toJson);
         }
       }
       }
@@ -117,7 +120,7 @@ public class ChatClientHandler implements Runnable, PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    System.out.println(evt.getPropertyName()  + " received in the ClientHandler");
+    //if we receive a message, we send it to all clients
     CommunicationPackage broadcast=new CommunicationPackage(evt.getPropertyName(), evt.getOldValue()+"", evt.getNewValue()+"", null);
     String toJson=gson.toJson(broadcast);
     out.println(toJson);

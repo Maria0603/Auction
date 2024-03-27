@@ -1,5 +1,6 @@
 package mediator;
 
+//for transporting data
 public class UserPackage
 {
   private String type, username, password, error;

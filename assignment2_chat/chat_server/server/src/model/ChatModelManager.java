@@ -21,6 +21,7 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
   }
   @Override public void send(String username, String message)
   {
+    //if we received a message, we fire an event
     if (!message.startsWith("/"))
     {
       property.firePropertyChange("Message", username, message);
@@ -29,9 +30,9 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject
 
   @Override public void createUser(String username, String password) throws IllegalArgumentException
   {
+    //we try to create a user with the entered data
       User user=new User(username, password);
       userList.addUser(user);
-      System.out.println(userList.toString());
   }
   @Override public UserList getUsers()
   {

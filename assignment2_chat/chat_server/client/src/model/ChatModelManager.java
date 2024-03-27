@@ -29,6 +29,8 @@ public class ChatModelManager implements ChatModel, NamedPropertyChangeSubject, 
     }
 
   }
+
+  //delegate all work to the client side
   @Override public String send(String username, String message)
   {
     return client.send(username, message);
